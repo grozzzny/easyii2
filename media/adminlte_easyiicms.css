@@ -1,0 +1,50 @@
+td.status{
+    vertical-align: middle !important;
+    text-align: center!important;
+}
+td.vtop{
+    vertical-align: top !important;
+}
+.switcher{
+    border: none !important;
+    background: #b3b8c3 !important;
+    color: #FFF !important;
+    height: 20px !important;
+    min-width: 40px !important;
+    font-size: 11px !important;
+    border-radius: 10px !important;
+    padding: 1px !important;
+}
+.switcher .slider{
+    background: #f0f3f3 !important;
+    height: 18px !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+.switcher.is-active{
+    background: #27b6af !important;
+}
+.switcher .textNo{
+    color: #fff !important;
+}
+.switcher > div{
+    min-height: inherit !important;
+    padding: 0 !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+.select2-container--krajee .select2-selection--single {
+    padding-top: 11px;
+}
+@media (max-width: 768px) {
+    table {
+        overflow: scroll;
+        display: block;
+    }
+    .btn-group{
+        white-space: nowrap;
+    }
+    .btn-group .btn{
+        float: none;
+    }
+}

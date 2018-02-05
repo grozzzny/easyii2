@@ -1,29 +1,24 @@
-# README #
+## easyii2CMS ##
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Control panel and tools based on php framework Yii2. Easy cms for easy websites.
 
-### What is this repository for? ###
+This repository is development package (yii2 extension).
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+#### You can find full information in links bellow ####
+* [Homepage](http://easyii2cms.com)
+* [Installation](http://easyii2cms.com/docs/install)
+* [Demo](http://easyii2cms.com/demo)
 
-### How do I get set up? ###
+#### Contacts ####
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+Feel free to email me on grozzznyhope@gmail.com
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+```
+"autoload": {
+    "psr-4": {
+        "yii\\easyii2\\": "vendor/grozzzny/easyii2"
+    }
+}
+composer dumpautoload
+```
