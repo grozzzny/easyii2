@@ -2,10 +2,11 @@
 namespace yii\easyii2\modules\text\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\API;
+use yii\easyii2\components\Module;
 use yii\easyii2\helpers\Data;
 use yii\helpers\Url;
-use yii\easyii2\modules\text\models\Text as TextModel;
 use yii\helpers\Html;
 
 /**
@@ -22,8 +23,11 @@ class Text extends API
     {
         parent::init();
 
-        $this->_texts = Data::cache(TextModel::CACHE_KEY, 3600, function(){
-            return TextModel::find()->asArray()->all();
+        $model = ActiveRecord::getModelByName('Text');
+
+        $this->_texts = Data::cache($model::CACHE_KEY, 3600, function(){
+            $model = ActiveRecord::getModelByName('Text');
+            return $model::find()->asArray()->all();
         });
     }
 

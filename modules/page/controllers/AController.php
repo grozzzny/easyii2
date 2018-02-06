@@ -3,6 +3,7 @@ namespace yii\easyii2\modules\page\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\easyii2\components\ActiveRecord;
 use yii\widgets\ActiveForm;
 
 use yii\easyii2\components\Controller;
@@ -14,8 +15,10 @@ class AController extends Controller
 
     public function actionIndex()
     {
+        $model = ActiveRecord::getModelByName('Page');
+
         $data = new ActiveDataProvider([
-            'query' => Page::find()->desc()
+            'query' => $model::find()->desc()
         ]);
         return $this->render('index', [
             'data' => $data
@@ -24,7 +27,7 @@ class AController extends Controller
 
     public function actionCreate($slug = null)
     {
-        $model = new Page;
+        $model =  ActiveRecord::getModelByName('Page');
 
         if ($model->load(Yii::$app->request->post())) {
             if(Yii::$app->request->isAjax){
@@ -53,7 +56,8 @@ class AController extends Controller
 
     public function actionEdit($id)
     {
-        $model = Page::findOne($id);
+        $model =  ActiveRecord::getModelByName('Page');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -84,7 +88,8 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Page::findOne($id))){
+        $model = ActiveRecord::getModelByName('Page');
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');

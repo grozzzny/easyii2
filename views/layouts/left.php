@@ -1,4 +1,5 @@
 <?
+use yii\easyii2\AdminModule;
 use yii\helpers\Url;
 
 /**
@@ -64,7 +65,7 @@ use yii\helpers\Url;
                 </ul>
             </li>
             <li class="header"><?= Yii::t('easyii2', 'Modules') ?>:</li>
-            <?php foreach(Yii::$app->getModule('admin')->activeModules as $module) : ?>
+            <?php foreach(AdminModule::getInstance()->allModules as $module) : ?>
             <li class="<?= ($this->context->module->id == $module->name ? 'active' : '') ?>">
                 <a href="<?= Url::to(["/admin/$module->name"]) ?>">
                     <?php if($module->icon != '') : ?>
@@ -73,9 +74,9 @@ use yii\helpers\Url;
                     <span>
                         <?= $module->title ?>
                     </span>
-                    <?php if($module->notice > 0) : ?>
+                    <?php if($module->model->notice > 0) : ?>
                     <span class="pull-right-container">
-                      <span class="label label-primary pull-right"><?= $module->notice ?></span>
+                      <span class="label label-primary pull-right"><?= $module->model->notice ?></span>
                     </span>
                     <?php endif; ?>
                 </a>

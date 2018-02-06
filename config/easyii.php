@@ -4,6 +4,11 @@ return [
     'modules' => [
         'admin' => [
             'class' => 'yii\easyii2\AdminModule',
+            'modules' => [
+                'page' => [
+                    'class' => 'yii\easyii2\modules\page\PageModule',
+                ],
+            ]
         ],
     ],
     'components' => [

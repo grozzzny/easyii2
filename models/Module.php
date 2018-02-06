@@ -7,6 +7,20 @@ use yii\easyii2\helpers\Data;
 use yii\easyii2\behaviors\CacheFlush;
 use yii\easyii2\behaviors\SortableModel;
 
+/**
+ * Class Module
+ * @package yii\easyii2\models
+ *
+ * @property int $module_id [int(11)]
+ * @property string $name [varchar(64)]
+ * @property string $class [varchar(128)]
+ * @property string $title [varchar(128)]
+ * @property string $icon [varchar(32)]
+ * @property string $settings
+ * @property int $notice [int(11)]
+ * @property int $order_num [int(11)]
+ * @property bool $status [tinyint(1)]
+ */
 class Module extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF= 0;
@@ -73,18 +87,13 @@ class Module extends \yii\easyii2\components\ActiveRecord
         $this->settings = $this->settings !== '' ? json_decode($this->settings, true) : self::getDefaultSettings($this->name);
     }
 
+    /**
+     * @return Module[]
+     */
     public static function findAllActive()
     {
         return Data::cache(self::CACHE_KEY, 3600, function(){
-            $result = [];
-            try {
-                foreach (self::find()->where(['status' => self::STATUS_ON])->sort()->all() as $module) {
-                    $module->trigger(self::EVENT_AFTER_FIND);
-                    $result[$module->name] = (object)$module->attributes;
-                }
-            }catch(\yii\db\Exception $e){}
-
-            return $result;
+            return self::find()->where(['status' => self::STATUS_ON])->sort()->all();
         });
     }
 
@@ -106,12 +115,10 @@ class Module extends \yii\easyii2\components\ActiveRecord
 
     static function getDefaultSettings($moduleName)
     {
-        $modules = Yii::$app->getModule('admin')->activeModules;
-        if(isset($modules[$moduleName])){
-            return Yii::createObject($modules[$moduleName]->class, [$moduleName])->settings;
-        } else {
-            return [];
-        }
+        $module = Yii::$app->getModule('admin')->getModule($moduleName);
+        $settings = Yii::createObject($module::className(), [$moduleName])->settings;
+
+        return isset($settings) ? $settings : [];
     }
 
 }

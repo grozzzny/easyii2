@@ -3,13 +3,20 @@ namespace yii\easyii2\components;
 
 use Yii;
 use yii\easyii2\models\Module as ModuleModel;
+use yii\easyii2\models\ModuleDBEasyii2Interface;
+
 
 /**
  * Base module class. Inherit from this if you are creating your own modules manually
  * @package yii\easyii2\components
  */
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements ModuleDBEasyii2Interface
 {
+    /**
+     * @var \yii\easyii2\models\Module
+     */
+    public $model;
+
     /** @var string  */
     public $defaultRoute = 'a';
 
@@ -82,5 +89,34 @@ class Module extends \yii\base\Module
             }
         }
         return false;
+    }
+
+    public function getTitle()
+    {
+        // TODO: Implement getTitle() method.
+        return $this->model->title;
+    }
+
+    public function getName()
+    {
+        // TODO: Implement getName() method.
+        return $this->model->name;
+    }
+
+    public function getIcon()
+    {
+        // TODO: Implement getIcon() method.
+        return $this->model->icon;
+    }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    public function getSettings()
+    {
+        // TODO: Implement getSettings() method.
+        return $this->settings;
     }
 }

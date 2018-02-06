@@ -3,6 +3,7 @@ namespace yii\easyii2\modules\text\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\easyii2\components\ActiveRecord;
 use yii\widgets\ActiveForm;
 
 use yii\easyii2\components\Controller;
@@ -14,8 +15,10 @@ class AController extends Controller
 
     public function actionIndex()
     {
+        $model = ActiveRecord::getModelByName('Text');
+
         $data = new ActiveDataProvider([
-            'query' => Text::find(),
+            'query' => $model::find(),
         ]);
         return $this->render('index', [
             'data' => $data

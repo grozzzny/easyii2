@@ -3,6 +3,8 @@ namespace yii\easyii2\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
+use yii\easyii2\AdminModule;
 use yii\easyii2\models\CopyModuleForm;
 use yii\helpers\FileHelper;
 use yii\widgets\ActiveForm;
@@ -31,8 +33,12 @@ class ModulesController extends \yii\easyii2\components\Controller
 
     public function actionIndex()
     {
-        $data = new ActiveDataProvider([
-            'query' => Module::find()->sort(),
+        $adminModule = AdminModule::getInstance();
+        $data = new ArrayDataProvider([
+            'allModels' => $adminModule->allModules,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
         ]);
         Yii::$app->user->setReturnUrl('/admin/modules');
 
