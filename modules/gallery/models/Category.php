@@ -3,6 +3,11 @@ namespace yii\easyii2\modules\gallery\models;
 
 use yii\easyii2\models\Photo;
 
+/**
+ * Class Category
+ * @package yii\easyii2\modules\gallery\models
+ *
+ */
 class Category extends \yii\easyii2\components\CategoryModel
 {
     public static function tableName()

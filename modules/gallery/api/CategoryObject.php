@@ -10,6 +10,11 @@ use yii\widgets\LinkPager;
 
 class CategoryObject extends \yii\easyii2\components\ApiObject
 {
+    /**
+     * @var Category
+     */
+    public $model;
+
     public $slug;
     public $image;
     public $tree;
