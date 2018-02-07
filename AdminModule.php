@@ -24,7 +24,9 @@ class AdminModule extends \yii\base\Module implements BootstrapInterface
 {
     const VERSION = 0.9;
 
-    public $settings;
+    public $settings = [
+        'modelSeoText' => '\yii\easyii2\models\SeoText'
+    ];
     public $activeModules;
     public $controllerLayout = '@easyii2/views/layouts/main';
 

@@ -23,10 +23,10 @@ class Text extends API
     {
         parent::init();
 
-        $model = ActiveRecord::getModelByName('Text');
+        $model = ActiveRecord::getModelByName('Text', 'text');
 
         $this->_texts = Data::cache($model::CACHE_KEY, 3600, function(){
-            $model = ActiveRecord::getModelByName('Text');
+            $model = ActiveRecord::getModelByName('Text', 'text');
             return $model::find()->asArray()->all();
         });
     }

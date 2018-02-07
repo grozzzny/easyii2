@@ -49,7 +49,9 @@ class SeoBehavior extends \yii\base\Behavior
 
     public function getSeo()
     {
-        return $this->owner->hasOne(SeoText::className(), ['item_id' => $this->owner->primaryKey()[0]])->where(['class' => get_class($this->owner)]);
+        $model = \yii\easyii2\components\ActiveRecord::getModelByName('SeoText', 'admin');
+
+        return $this->owner->hasOne($model::className(), ['item_id' => $this->owner->primaryKey()[0]])->where(['class' => get_class($this->owner)]);
     }
 
     public function getSeoText()
@@ -58,10 +60,11 @@ class SeoBehavior extends \yii\base\Behavior
         {
             $this->_model = $this->owner->seo;
             if(!$this->_model){
-                $this->_model = new SeoText([
-                    'class' => get_class($this->owner),
-                    'item_id' => $this->owner->primaryKey
-                ]);
+                $model = \yii\easyii2\components\ActiveRecord::getModelByName('SeoText', 'admin');
+                $model->class = get_class($this->owner);
+                $model->item_id = $this->owner->primaryKey;
+
+                $this->_model = $model;
             }
         }
 

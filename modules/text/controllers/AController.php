@@ -15,7 +15,7 @@ class AController extends Controller
 
     public function actionIndex()
     {
-        $model = ActiveRecord::getModelByName('Text');
+        $model = ActiveRecord::getModelByName('Text', 'text');
 
         $data = new ActiveDataProvider([
             'query' => $model::find(),
@@ -27,7 +27,7 @@ class AController extends Controller
 
     public function actionCreate($slug = null)
     {
-        $model = new Text;
+        $model = ActiveRecord::getModelByName('Text', 'text');
 
         if ($model->load(Yii::$app->request->post())) {
             if(Yii::$app->request->isAjax){
@@ -57,7 +57,8 @@ class AController extends Controller
 
     public function actionEdit($id)
     {
-        $model = Text::findOne($id);
+        $model = ActiveRecord::getModelByName('Text', 'text');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -88,7 +89,8 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Text::findOne($id))){
+        $model = ActiveRecord::getModelByName('Text', 'text');
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');

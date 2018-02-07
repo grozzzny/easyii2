@@ -15,7 +15,7 @@ class AController extends Controller
 
     public function actionIndex()
     {
-        $model = ActiveRecord::getModelByName('Page');
+        $model = ActiveRecord::getModelByName('Page', 'page');
 
         $data = new ActiveDataProvider([
             'query' => $model::find()->desc()
@@ -27,7 +27,7 @@ class AController extends Controller
 
     public function actionCreate($slug = null)
     {
-        $model =  ActiveRecord::getModelByName('Page');
+        $model =  ActiveRecord::getModelByName('Page', 'page');
 
         if ($model->load(Yii::$app->request->post())) {
             if(Yii::$app->request->isAjax){
@@ -56,7 +56,7 @@ class AController extends Controller
 
     public function actionEdit($id)
     {
-        $model =  ActiveRecord::getModelByName('Page');
+        $model =  ActiveRecord::getModelByName('Page', 'page');
         $model = $model::findOne($id);
 
         if($model === null){
@@ -88,7 +88,7 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        $model = ActiveRecord::getModelByName('Page');
+        $model = ActiveRecord::getModelByName('Page', 'page');
         if(($model = $model::findOne($id))){
             $model->delete();
         } else {

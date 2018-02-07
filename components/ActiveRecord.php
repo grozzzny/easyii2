@@ -25,12 +25,10 @@ class ActiveRecord extends \yii\db\ActiveRecord
     /**
      * @return self
      */
-    public static function getModelByName($name_model)
+    public static function getModelByName($name_model, $name_module)
     {
         $adminModule = AdminModule::getInstance();
-        $curentNameModule = \Yii::$app->controller->module->id;
-
-        $settings = $adminModule->getModule($curentNameModule)->settings;
+        $settings = $name_module == $adminModule->id ? $adminModule->settings : $adminModule->getModule($name_module)->settings;
 
         $class_name = ArrayHelper::getValue($settings, 'model'.$name_model, '');
 

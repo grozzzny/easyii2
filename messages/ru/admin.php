@@ -123,6 +123,10 @@ return [
 
     'Clear image' => 'Очистить изображение',
     'Image cleared' => 'Изображение очищено',
-
-
+    'Post created' => 'Запись создана',
+    'Error' => 'Ошибка',
+    'Post updated' => 'Запись обновлена',
+    'Post deleted' => 'Запись удалена',
+    'File cleared' => 'Файл удален',
+    'Remove file' => 'Удалить файл'
 ];
