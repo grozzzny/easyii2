@@ -16,7 +16,7 @@ class PageModule extends \yii\easyii2\components\Module implements ModuleEasyii2
     public function getTitle()
     {
         // TODO: Implement getTitle() method.
-        return Yii::t('app', $this->title);
+        return Yii::t('easyii2', $this->title);
     }
 
     public function getName()

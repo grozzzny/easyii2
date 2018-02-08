@@ -7,10 +7,12 @@ use yii\easyii2\helpers\Image;
 /**
  * Class ApiObject
  * @package yii\easyii2\components
+ *
+ * @property integer $id
  */
 class ApiObject extends \yii\base\Object
 {
-    /** @var \yii\base\Model  */
+    /** @var ActiveRecord  */
     public $model;
 
     /**

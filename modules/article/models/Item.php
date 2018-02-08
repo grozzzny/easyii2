@@ -5,9 +5,29 @@ use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\easyii2\behaviors\SeoBehavior;
 use yii\easyii2\behaviors\Taggable;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\models\Photo;
 use yii\helpers\StringHelper;
 
+/**
+ * Class Item
+ * @package yii\easyii2\modules\article\models
+ *
+ *
+ * @property int $item_id [int(11)]
+ * @property int $category_id [int(11)]
+ * @property string $title [varchar(128)]
+ * @property string $image [varchar(128)]
+ * @property string $short [varchar(1024)]
+ * @property string $text
+ * @property string $slug [varchar(128)]
+ * @property int $time [int(11)]
+ * @property int $views [int(11)]
+ * @property bool $status [tinyint(1)]
+ *
+ * @property-ready Category $category
+ * @property-ready Photo[] $photos
+ */
 class Item extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;
@@ -21,7 +41,7 @@ class Item extends \yii\easyii2\components\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'title'], 'required'],
+            [['text', 'title', 'slug'], 'required'],
             [['title', 'short', 'text'], 'trim'],
             ['title', 'string', 'max' => 128],
             ['image', 'image'],
@@ -30,7 +50,8 @@ class Item extends \yii\easyii2\components\ActiveRecord
             ['slug', 'match', 'pattern' => self::$SLUG_PATTERN, 'message' => Yii::t('easyii2', 'Slug can contain only 0-9, a-z and "-" characters (max: 128).')],
             ['slug', 'default', 'value' => null],
             ['status', 'default', 'value' => self::STATUS_ON],
-            ['tagNames', 'safe']
+            ['tagNames', 'safe'],
+            ['slug', 'unique']
         ];
     }
 
@@ -52,17 +73,13 @@ class Item extends \yii\easyii2\components\ActiveRecord
         return [
             'seoBehavior' => SeoBehavior::className(),
             'taggabble' => Taggable::className(),
-            'sluggable' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'ensureUnique' => true
-            ]
         ];
     }
 
     public function getCategory()
     {
-        return $this->hasOne(Category::className(), ['category_id' => 'category_id']);
+        $model = ActiveRecord::getModelByName('Category', 'article');
+        return $this->hasOne($model::className(), ['category_id' => 'category_id']);
     }
 
     public function getPhotos()

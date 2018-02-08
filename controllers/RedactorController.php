@@ -116,8 +116,8 @@ class RedactorController extends \yii\easyii2\components\Controller
     private function getResponse($fileName)
     {
         return [
-            'filelink' => $fileName,
-            'filename' => basename($fileName)
+            'url' => $fileName,
+            'id' => basename($fileName)
         ];
     }
 }

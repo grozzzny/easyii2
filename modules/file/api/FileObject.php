@@ -6,8 +6,25 @@ use yii\easyii2\components\API;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/**
+ * Class FileObject
+ * @package yii\easyii2\modules\file\api
+ *
+ * @property string $title
+ * @property string $file
+ * @property string $link
+ * @property string $bytes
+ * @property string $size
+ * @property string $date
+ * @property string $editLink
+ */
 class FileObject extends \yii\easyii2\components\ApiObject
 {
+    /**
+     * @var File
+     */
+    public $model;
+
     public $slug;
     public $downloads;
     public $time;

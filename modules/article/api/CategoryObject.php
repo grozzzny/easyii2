@@ -3,14 +3,28 @@ namespace yii\easyii2\modules\article\api;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\API;
 use yii\easyii2\models\Tag;
 use yii\easyii2\modules\article\models\Item;
+use yii\easyii2\modules\gallery\models\Category;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
 
+/**
+ * Class CategoryObject
+ * @package yii\easyii2\modules\article\api
+ *
+ * @property string $title
+ * @property string $editLink
+ */
 class CategoryObject extends \yii\easyii2\components\ApiObject
 {
+    /**
+     * @var Category
+     */
+    public $model;
+
     public $slug;
     public $image;
     public $tree;
@@ -31,6 +45,10 @@ class CategoryObject extends \yii\easyii2\components\ApiObject
         return $this->_adp ? $this->_adp->pagination : null;
     }
 
+    /**
+     * @param array $options
+     * @return ArticleObject[]
+     */
     public function items($options = [])
     {
         if(!$this->_items){
@@ -41,7 +59,9 @@ class CategoryObject extends \yii\easyii2\components\ApiObject
                 $with[] = 'tags';
             }
 
-            $query = Item::find()->with('seo')->where(['category_id' => $this->id])->status(Item::STATUS_ON)->sortDate();
+            $model = ActiveRecord::getModelByName('Item', 'article');
+            $modelClassName = $model::className();
+            $query = $model::find()->with('seo')->where(['category_id' => $this->id])->status(Item::STATUS_ON)->sortDate();
 
             if(!empty($options['where'])){
                 $query->andFilterWhere($options['where']);
@@ -49,7 +69,7 @@ class CategoryObject extends \yii\easyii2\components\ApiObject
             if(!empty($options['tags'])){
                 $query
                     ->innerJoinWith('tags', false)
-                    ->andWhere([Tag::tableName() . '.name' => (new Item())->filterTagValues($options['tags'])])
+                    ->andWhere([Tag::tableName() . '.name' => (new $modelClassName)->filterTagValues($options['tags'])])
                     ->addGroupBy('item_id');
             }
 

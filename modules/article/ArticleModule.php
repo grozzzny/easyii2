@@ -13,6 +13,9 @@ class ArticleModule extends \yii\easyii2\components\Module
         'enableTags' => true,
 
         'itemsInFolder' => false,
+
+        'modelCategory' => '\yii\easyii2\modules\article\models\Category',
+        'modelItem' => '\yii\easyii2\modules\article\models\Item',
     ];
 
     public static $installConfig = [

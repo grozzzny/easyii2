@@ -1,6 +1,8 @@
 <?php
 namespace yii\easyii2\modules\article\models;
 
+use yii\easyii2\components\ActiveRecord;
+
 class Category extends \yii\easyii2\components\CategoryModel
 {
     public static function tableName()
@@ -10,7 +12,8 @@ class Category extends \yii\easyii2\components\CategoryModel
 
     public function getItems()
     {
-        return $this->hasMany(Item::className(), ['category_id' => 'category_id'])->sortDate();
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        return $this->hasMany($model::className(), ['category_id' => 'category_id'])->sortDate();
     }
 
     public function afterDelete()

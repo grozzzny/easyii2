@@ -20,14 +20,15 @@ class CategoryModel extends \yii\easyii2\components\ActiveRecord
     public function rules()
     {
         return [
-            ['title', 'required'],
+            [['title', 'slug'], 'required'],
             ['title', 'trim'],
             ['title', 'string', 'max' => 128],
             ['image', 'image'],
             ['slug', 'match', 'pattern' => self::$SLUG_PATTERN, 'message' => Yii::t('easyii2', 'Slug can contain only 0-9, a-z and "-" characters (max: 128).')],
             ['slug', 'default', 'value' => null],
             ['status', 'integer'],
-            ['status', 'default', 'value' => self::STATUS_ON]
+            ['status', 'default', 'value' => self::STATUS_ON],
+            ['slug', 'unique']
         ];
     }
 
@@ -48,11 +49,11 @@ class CategoryModel extends \yii\easyii2\components\ActiveRecord
                 'key' => [static::tableName().'_tree', static::tableName().'_flat']
             ],
             'seoBehavior' => SeoBehavior::className(),
-            'sluggable' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'ensureUnique' => true
-            ],
+//            'sluggable' => [
+//                'class' => SluggableBehavior::className(),
+//                'attribute' => 'title',
+//                'ensureUnique' => true
+//            ],
             'tree' => [
                 'class' => NestedSetsBehavior::className(),
                 'treeAttribute' => 'tree'

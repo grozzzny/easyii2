@@ -29,7 +29,32 @@ $module = $this->context->module->id;
             'minHeight' => 400,
             'imageUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'catalog'], true),
             'fileUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'catalog'], true),
-            'plugins' => ['fullscreen']
+            'plugins' => [
+                "alignment",
+                "clips",
+                "counter",
+                "definedlinks",
+                "fontcolor",
+                "fontfamily",
+                "fontsize",
+                "fullscreen",
+                "filemanager",
+                "imagemanager",
+                "inlinestyle",
+                "limiter",
+                "properties",
+                //"source",
+                "table",
+                //"textdirection",
+                "textexpander",
+                "video",
+                "codemirror",
+            ],
+            'codemirror:' => [
+                'lineNumbers' => true,
+                'mode' => 'xml',
+                'indentUnit' => 4
+            ]
         ]
     ]) ?>
 <?php endif; ?>

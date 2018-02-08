@@ -4,11 +4,10 @@ namespace yii\easyii2\modules\article\controllers;
 use Yii;
 use yii\easyii2\behaviors\SortableDateController;
 use yii\easyii2\behaviors\StatusController;
+use yii\easyii2\components\ActiveRecord;
 use yii\web\UploadedFile;
 
 use yii\easyii2\components\Controller;
-use yii\easyii2\modules\article\models\Category;
-use yii\easyii2\modules\article\models\Item;
 use yii\easyii2\helpers\Image;
 use yii\widgets\ActiveForm;
 
@@ -16,21 +15,23 @@ class ItemsController extends Controller
 {
     public function behaviors()
     {
+        $model = ActiveRecord::getModelByName('Item', 'article');
         return [
             [
                 'class' => SortableDateController::className(),
-                'model' => Item::className(),
+                'model' => $model::className(),
             ],
             [
             'class' => StatusController::className(),
-            'model' => Item::className()
+            'model' => $model::className()
             ]
         ];
     }
 
     public function actionIndex($id)
     {
-        if(!($model = Category::findOne($id))){
+        $model = ActiveRecord::getModelByName('Category', 'article');
+        if(!($model = $model::findOne($id))){
             return $this->redirect(['/admin/'.$this->module->id]);
         }
 
@@ -42,11 +43,12 @@ class ItemsController extends Controller
 
     public function actionCreate($id)
     {
-        if(!($category = Category::findOne($id))){
+        $category = ActiveRecord::getModelByName('Category', 'article');
+        if(!($category = $category::findOne($id))){
             return $this->redirect(['/admin/'.$this->module->id]);
         }
 
-        $model = new Item;
+        $model = ActiveRecord::getModelByName('Item', 'article');
 
         if ($model->load(Yii::$app->request->post())) {
             if(Yii::$app->request->isAjax){
@@ -84,7 +86,8 @@ class ItemsController extends Controller
 
     public function actionEdit($id)
     {
-        if(!($model = Item::findOne($id))){
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        if(!($model = $model::findOne($id))){
             return $this->redirect(['/admin/'.$this->module->id]);
         }
 
@@ -121,7 +124,8 @@ class ItemsController extends Controller
 
     public function actionPhotos($id)
     {
-        if(!($model = Item::findOne($id))){
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        if(!($model = $model::findOne($id))){
             return $this->redirect(['/admin/'.$this->module->id]);
         }
 
@@ -132,7 +136,8 @@ class ItemsController extends Controller
 
     public function actionClearImage($id)
     {
-        $model = Item::findOne($id);
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -150,7 +155,8 @@ class ItemsController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Item::findOne($id))){
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');
@@ -170,11 +176,13 @@ class ItemsController extends Controller
 
     public function actionOn($id)
     {
-        return $this->changeStatus($id, Item::STATUS_ON);
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        return $this->changeStatus($id, $model::STATUS_ON);
     }
 
     public function actionOff($id)
     {
-        return $this->changeStatus($id, Item::STATUS_OFF);
+        $model = ActiveRecord::getModelByName('Item', 'article');
+        return $this->changeStatus($id, $model::STATUS_OFF);
     }
 }

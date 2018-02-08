@@ -15,7 +15,32 @@ use yii\easyii2\widgets\SeoForm;
         'minHeight' => 400,
         'imageUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'pages']),
         'fileUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'pages']),
-        'plugins' => ['fullscreen']
+        'plugins' => [
+            "alignment",
+            "clips",
+            "counter",
+            "definedlinks",
+            "fontcolor",
+            "fontfamily",
+            "fontsize",
+            "fullscreen",
+            "filemanager",
+            "imagemanager",
+            "inlinestyle",
+            "limiter",
+            "properties",
+            //"source",
+            "table",
+            //"textdirection",
+            "textexpander",
+            "video",
+            "codemirror",
+        ],
+        'codemirror:' => [
+            'lineNumbers' => true,
+            'mode' => 'xml',
+            'indentUnit' => 4
+        ]
     ]
 ]) ?>
 

@@ -25,7 +25,7 @@ class Text extends API
 
         $model = ActiveRecord::getModelByName('Text', 'text');
 
-        $this->_texts = Data::cache($model::CACHE_KEY, 3600, function(){
+        $this->_texts = Data::cache($model::tableName(), 3600, function(){
             $model = ActiveRecord::getModelByName('Text', 'text');
             return $model::find()->asArray()->all();
         });
@@ -53,7 +53,9 @@ class Text extends API
     {
         $text = '';
 
-        if(!Yii::$app->user->isGuest && preg_match(TextModel::$SLUG_PATTERN, $id_slug)){
+        $model = ActiveRecord::getModelByName('Text', 'text');
+
+        if(!Yii::$app->user->isGuest && preg_match($model::$SLUG_PATTERN, $id_slug)){
             $text = Html::a(Yii::t('easyii2/text/api', 'Create text'), ['/admin/text/a/create', 'slug' => $id_slug], ['target' => '_blank']);
         }
 

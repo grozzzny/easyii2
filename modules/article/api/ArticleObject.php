@@ -7,8 +7,26 @@ use yii\easyii2\models\Photo;
 use yii\easyii2\modules\article\models\Item;
 use yii\helpers\Url;
 
+/**
+ * Class ArticleObject
+ * @package yii\easyii2\modules\article\api
+ *
+ * @property string $short
+ * @property string $title
+ * @property string $text
+ * @property CategoryObject $cat
+ * @property array $tags
+ * @property string $date
+ * @property PhotoObject[] $photos
+ * @property string $editLink
+ */
 class ArticleObject extends \yii\easyii2\components\ApiObject
 {
+    /**
+     * @var Item
+     */
+    public $model;
+
     /** @var  string */
     public $slug;
 

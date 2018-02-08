@@ -27,7 +27,8 @@ class PhotoObject extends \yii\easyii2\components\ApiObject
             'data-fancybox' => 'group',
             'data-caption' => $this->description
         ]);
-        return LIVE_EDIT ? API::liveEdit($a, $this->editLink) : $a;
+        //return LIVE_EDIT ? API::liveEdit($a, $this->editLink) : $a;
+        return $a;
     }
 
     public function getEditLink(){

@@ -35,7 +35,7 @@ class News extends \yii\easyii2\components\ActiveRecord
     public function rules()
     {
         return [
-            [['text', 'title'], 'required'],
+            [['text', 'title', 'slug'], 'required'],
             [['title', 'short', 'text'], 'trim'],
             ['title', 'string', 'max' => 128],
             ['image', 'image'],
@@ -44,7 +44,8 @@ class News extends \yii\easyii2\components\ActiveRecord
             ['slug', 'match', 'pattern' => self::$SLUG_PATTERN, 'message' => Yii::t('easyii2', 'Slug can contain only 0-9, a-z and "-" characters (max: 128).')],
             ['slug', 'default', 'value' => null],
             ['status', 'default', 'value' => self::STATUS_ON],
-            ['tagNames', 'safe']
+            ['tagNames', 'safe'],
+            ['slug', 'unique']
         ];
     }
 
@@ -66,11 +67,6 @@ class News extends \yii\easyii2\components\ActiveRecord
         return [
             'seoBehavior' => SeoBehavior::className(),
             'taggabble' => Taggable::className(),
-            'sluggable' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'ensureUnique' => true
-            ],
         ];
     }
 
