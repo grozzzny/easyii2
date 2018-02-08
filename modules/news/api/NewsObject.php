@@ -2,13 +2,25 @@
 namespace yii\easyii2\modules\news\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\API;
 use yii\easyii2\models\Photo;
 use yii\easyii2\modules\news\models\News as NewsModel;
 use yii\helpers\Url;
 
+/**
+ * Class NewsObject
+ * @package yii\easyii2\modules\news\api
+ *
+ * @property-read PhotoObject[] $photos
+ */
 class NewsObject extends \yii\easyii2\components\ApiObject
 {
+    /**
+     * @var \yii\easyii2\modules\news\models\News
+     */
+    public $model;
+
     public $slug;
     public $image;
     public $views;
@@ -40,8 +52,8 @@ class NewsObject extends \yii\easyii2\components\ApiObject
     {
         if(!$this->_photos){
             $this->_photos = [];
-
-            foreach(Photo::find()->where(['class' => NewsModel::className(), 'item_id' => $this->id])->sort()->all() as $model){
+            $model = ActiveRecord::getModelByName('News', 'news');
+            foreach(Photo::find()->where(['class' => $model::className(), 'item_id' => $this->id])->sort()->all() as $model){
                 $this->_photos[] = new PhotoObject($model);
             }
         }

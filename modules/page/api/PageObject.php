@@ -6,8 +6,22 @@ use yii\easyii2\components\API;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/**
+ * Class PageObject
+ * @package yii\easyii2\modules\page\api
+ *
+ * @property-read string $title
+ * @property-read string $text
+ * @property-read string $editLink
+ * @property-read string $createLink
+ */
 class PageObject extends \yii\easyii2\components\ApiObject
 {
+    /**
+     * @var \yii\easyii2\modules\page\models\Page
+     */
+    public $model;
+
     public $slug;
 
     public function getTitle(){

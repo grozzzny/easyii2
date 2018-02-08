@@ -4,6 +4,17 @@ namespace yii\easyii2\models;
 use Yii;
 use yii\easyii2\behaviors\SortableModel;
 
+/**
+ * Class Photo
+ * @package yii\easyii2\models
+ *
+ * @property integer $photo_id
+ * @property string $class
+ * @property integer $item_id
+ * @property string $image
+ * @property string $description
+ * @property integer $order_num
+ */
 class Photo extends \yii\easyii2\components\ActiveRecord
 {
     const PHOTO_MAX_WIDTH = 1900;

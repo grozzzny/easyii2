@@ -8,6 +8,20 @@ use yii\easyii2\behaviors\Taggable;
 use yii\easyii2\models\Photo;
 use yii\helpers\StringHelper;
 
+/**
+ * Class News
+ * @package yii\easyii2\modules\news\models
+ *
+ * @property integer $news_id
+ * @property string $title
+ * @property string $image
+ * @property string $short
+ * @property string $text
+ * @property string $slug
+ * @property integer $time
+ * @property integer $views
+ * @property boolean $status
+ */
 class News extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;

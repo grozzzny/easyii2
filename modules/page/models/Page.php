@@ -4,6 +4,15 @@ namespace yii\easyii2\modules\page\models;
 use Yii;
 use yii\easyii2\behaviors\SeoBehavior;
 
+/**
+ * Class Page
+ * @package yii\easyii2\modules\page\models
+ *
+ * @property integer $page_id
+ * @property string $title
+ * @property string $text
+ * @property slug $string
+ */
 class Page extends \yii\easyii2\components\ActiveRecord
 {
     public static function tableName()

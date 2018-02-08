@@ -8,7 +8,8 @@ class NewsModule extends \yii\easyii2\components\Module
         'enablePhotos' => true,
         'enableShort' => true,
         'shortMaxLength' => 256,
-        'enableTags' => true
+        'enableTags' => true,
+        'modelNews' => '\yii\easyii2\modules\news\models\News',
     ];
 
     public static $installConfig = [

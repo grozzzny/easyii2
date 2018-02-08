@@ -4,6 +4,7 @@ namespace yii\easyii2\modules\news\controllers;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\easyii2\behaviors\SortableDateController;
+use yii\easyii2\components\ActiveRecord;
 use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
 
@@ -16,22 +17,24 @@ class AController extends Controller
 {
     public function behaviors()
     {
+        $model = ActiveRecord::getModelByName('News', 'news');
         return [
             [
                 'class' => SortableDateController::className(),
-                'model' => News::className(),
+                'model' => $model::className(),
             ],
             [
                 'class' => StatusController::className(),
-                'model' => News::className()
+                'model' => $model::className()
             ]
         ];
     }
 
     public function actionIndex()
     {
+        $model = ActiveRecord::getModelByName('News', 'news');
         $data = new ActiveDataProvider([
-            'query' => News::find()->sortDate(),
+            'query' => $model::find()->sortDate(),
         ]);
 
         return $this->render('index', [
@@ -41,7 +44,7 @@ class AController extends Controller
 
     public function actionCreate()
     {
-        $model = new News;
+        $model = ActiveRecord::getModelByName('News', 'news');
         $model->time = time();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -78,7 +81,8 @@ class AController extends Controller
 
     public function actionEdit($id)
     {
-        $model = News::findOne($id);
+        $model = ActiveRecord::getModelByName('News', 'news');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -119,7 +123,8 @@ class AController extends Controller
 
     public function actionPhotos($id)
     {
-        if(!($model = News::findOne($id))){
+        $model = ActiveRecord::getModelByName('News', 'news');
+        if(!($model = $model::findOne($id))){
             return $this->redirect(['/admin/'.$this->module->id]);
         }
 
@@ -130,7 +135,8 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = News::findOne($id))){
+        $model = ActiveRecord::getModelByName('News', 'news');
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');
@@ -140,7 +146,8 @@ class AController extends Controller
 
     public function actionClearImage($id)
     {
-        $model = News::findOne($id);
+        $model = ActiveRecord::getModelByName('News', 'news');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -169,11 +176,13 @@ class AController extends Controller
 
     public function actionOn($id)
     {
-        return $this->changeStatus($id, News::STATUS_ON);
+        $model = ActiveRecord::getModelByName('News', 'news');
+        return $this->changeStatus($id, $model::STATUS_ON);
     }
 
     public function actionOff($id)
     {
-        return $this->changeStatus($id, News::STATUS_OFF);
+        $model = ActiveRecord::getModelByName('News', 'news');
+        return $this->changeStatus($id, $model::STATUS_OFF);
     }
 }

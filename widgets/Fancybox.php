@@ -6,7 +6,7 @@ use yii\base\Widget;
 use yii\base\InvalidConfigException;
 use yii\helpers\Json;
 
-use yii\easyii2\assets\FancyboxAsset;
+use grozzzny\depends\fancybox\FancyboxAsset;
 
 class Fancybox extends Widget
 {

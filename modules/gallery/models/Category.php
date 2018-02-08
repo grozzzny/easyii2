@@ -7,6 +7,16 @@ use yii\easyii2\models\Photo;
  * Class Category
  * @package yii\easyii2\modules\gallery\models
  *
+ * @property integer $category_id
+ * @property string $title
+ * @property string $image
+ * @property string $slug
+ * @property integer $tree
+ * @property integer $lft
+ * @property integer $rgt
+ * @property integer $depth
+ * @property integer $order_num
+ * @property boolean $status
  */
 class Category extends \yii\easyii2\components\CategoryModel
 {
