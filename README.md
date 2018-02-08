@@ -22,3 +22,15 @@ Feel free to email me on grozzznyhope@gmail.com
 }
 composer dumpautoload
 ```
+
+###Redactor
+```php
+$form->field($model, 'text')->widget(Redactor::className(),[
+    'options' => [
+        'minHeight' => 400,
+        'imageUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'news']),
+        'fileUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'news']),
+        'plugins' => ['fullscreen', 'fontcolor', 'table', 'video'] //clips counter definedlinks filemanager fontcolor fontcolor fontsize fullscreen limiter table textdirection textexpander video
+    ]
+])
+```
