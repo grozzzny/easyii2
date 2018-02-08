@@ -31,9 +31,8 @@ $form->field($model, 'text')->widget(Redactor::className(),[
         'imageUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'news']),
         'fileUpload' => Url::to(['/admin/redactor/upload', 'dir' => 'news']),
         'plugins' => [
-              "alignment",
+            "alignment",
             "clips",
-            "codemirror",
             "counter",
             "definedlinks",
             "fontcolor",
@@ -45,11 +44,17 @@ $form->field($model, 'text')->widget(Redactor::className(),[
             "inlinestyle",
             "limiter",
             "properties",
-            "source",
+            //"source",
             "table",
-            "textdirection",
+            //"textdirection",
             "textexpander",
             "video",
+            "codemirror",
+        ],
+        'codemirror:' => [
+            'lineNumbers' => true,
+            'mode' => 'xml',
+            'indentUnit' => 4
         ]
     ]
 ]) 
