@@ -20,6 +20,8 @@ use yii\easyii2\behaviors\SortableModel;
  * @property int $notice [int(11)]
  * @property int $order_num [int(11)]
  * @property bool $status [tinyint(1)]
+ *
+ * @property-read array $defaultSettings
  */
 class Module extends \yii\easyii2\components\ActiveRecord
 {
@@ -43,6 +45,7 @@ class Module extends \yii\easyii2\components\ActiveRecord
             ['class',  'match', 'pattern' => '/^[\w\\\]+$/'],
             ['class',  'checkExists'],
             ['icon', 'string'],
+            ['status', 'default', 'value' => 1],
             ['status', 'in', 'range' => [0,1]],
         ];
     }
@@ -71,7 +74,7 @@ class Module extends \yii\easyii2\components\ActiveRecord
     {
         if (parent::beforeSave($insert)) {
             if(!$this->settings || !is_array($this->settings)){
-                $this->settings = self::getDefaultSettings($this->name);
+                $this->settings = $this->defaultSettings;
             }
             $this->settings = json_encode($this->settings);
 
@@ -84,7 +87,7 @@ class Module extends \yii\easyii2\components\ActiveRecord
     public function afterFind()
     {
         parent::afterFind();
-        $this->settings = $this->settings !== '' ? json_decode($this->settings, true) : self::getDefaultSettings($this->name);
+        $this->settings = $this->settings !== '' ? json_decode($this->settings, true) : $this->defaultSettings;
     }
 
     /**
@@ -113,10 +116,10 @@ class Module extends \yii\easyii2\components\ActiveRecord
         }
     }
 
-    static function getDefaultSettings($moduleName)
+    public function getDefaultSettings()
     {
-        $module = Yii::$app->getModule('admin')->getModule($moduleName);
-        return isset($module) ? Yii::createObject($module::className(), [$moduleName])->settings : [];
+        $exemplar = Yii::createObject($this->class, [$this->name]);
+        return isset($exemplar->settings) ? $exemplar->settings : [];
     }
 
 }
