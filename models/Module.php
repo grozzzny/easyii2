@@ -116,9 +116,7 @@ class Module extends \yii\easyii2\components\ActiveRecord
     static function getDefaultSettings($moduleName)
     {
         $module = Yii::$app->getModule('admin')->getModule($moduleName);
-        $settings = Yii::createObject($module::className(), [$moduleName])->settings;
-
-        return isset($settings) ? $settings : [];
+        return isset($module) ? Yii::createObject($module::className(), [$moduleName])->settings : [];
     }
 
 }
