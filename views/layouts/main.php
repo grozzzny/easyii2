@@ -1,17 +1,15 @@
 <?php
 use yii\easyii2\assets\AdminLteAsset;
-use yii\easyii2\assets\AdminlteEasyiicmsAsset;
 use yii\helpers\Html;
 use yii\easyii2\assets\AdminAsset;
+use yii\easyii2\assets\AdminlteEasyiicmsAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-
 AdminAsset::register($this);
 $adminLteAsset = AdminLteAsset::register($this);
 AdminlteEasyiicmsAsset::register($this);
-
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
