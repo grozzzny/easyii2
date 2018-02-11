@@ -26,6 +26,8 @@ class Module extends \yii\base\Module implements ModuleDBEasyii2Interface
     /** @var  @todo */
     public $i18n;
 
+    public $notice;
+
     /**
      * Configuration for installation
      * @var array
