@@ -80,7 +80,7 @@ class Guestbook extends \yii\easyii2\components\API
     public function api_form($options = [])
     {
         $model = new GuestbookModel;
-        $settings = Yii::$app->getModule('admin')->activeModules['guestbook']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('guestbook')->settings;
         $options = array_merge($this->_defaultFormOptions, $options);
 
         ob_start();

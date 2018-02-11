@@ -27,7 +27,7 @@ class AController extends Controller
     {
         parent::init();
 
-        $this->new = Yii::$app->getModule('admin')->activeModules['guestbook']->notice;
+        $this->new = Yii::$app->getModule('admin')->getModule('guestbook')->notice;
         $this->noAnswer = Guestbook::find()->where(['answer' => ''])->count();
     }
 

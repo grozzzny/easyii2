@@ -4,7 +4,7 @@ use yii\helpers\Url;
 
 \yii\bootstrap\BootstrapPluginAsset::register($this);
 
-$this->title = Yii::$app->getModule('admin')->activeModules[$this->context->module->id]->title;
+$this->title = Yii::$app->getModule('admin')->getModule($this->context->module->id)->title;
 
 $baseUrl = '/admin/'.$this->context->moduleName;
 ?>

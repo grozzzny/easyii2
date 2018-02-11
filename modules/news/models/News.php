@@ -80,7 +80,7 @@ class News extends \yii\easyii2\components\ActiveRecord
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
-            $settings = Yii::$app->getModule('admin')->activeModules['news']->settings;
+            $settings = Yii::$app->getModule('admin')->getModule('news')->settings;
             $this->short = StringHelper::truncate($settings['enableShort'] ? $this->short : strip_tags($this->text), $settings['shortMaxLength']);
 
             if(!$insert && $this->image != $this->oldAttributes['image'] && $this->oldAttributes['image']){

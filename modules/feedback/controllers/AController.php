@@ -17,7 +17,7 @@ class AController extends Controller
     {
         parent::init();
 
-        $this->new = Yii::$app->getModule('admin')->activeModules['feedback']->notice;
+        $this->new = Yii::$app->getModule('admin')->getModule('feedback')->notice;
         $this->noAnswer = Feedback::find()->status(Feedback::STATUS_VIEW)->count();
     }
 

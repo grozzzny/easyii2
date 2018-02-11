@@ -59,7 +59,7 @@ class Article extends \yii\easyii2\components\API
             $this->_items = [];
 
             $with = ['seo', 'category'];
-            if(Yii::$app->getModule('admin')->activeModules['article']->settings['enableTags']){
+            if(Yii::$app->getModule('admin')->getModule('article')->settings['enableTags']){
                 $with[] = 'tags';
             }
             $model = ActiveRecord::getModelByName('Item', 'article');
@@ -102,7 +102,7 @@ class Article extends \yii\easyii2\components\API
         $result = [];
 
         $with = ['seo'];
-        if(Yii::$app->getModule('admin')->activeModules['article']->settings['enableTags']){
+        if(Yii::$app->getModule('admin')->getModule('article')->settings['enableTags']){
             $with[] = 'tags';
         }
         $model = ActiveRecord::getModelByName('Item', 'article');

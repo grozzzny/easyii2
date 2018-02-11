@@ -3,6 +3,7 @@ namespace yii\easyii2\modules\feedback;
 
 class FeedbackModule extends \yii\easyii2\components\Module
 {
+
     public $settings = [
         'mailAdminOnNewFeedback' => true,
         'subjectOnNewFeedback' => 'New feedback',

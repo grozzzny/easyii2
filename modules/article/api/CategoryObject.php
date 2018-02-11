@@ -55,7 +55,7 @@ class CategoryObject extends \yii\easyii2\components\ApiObject
             $this->_items = [];
 
             $with = ['seo'];
-            if(Yii::$app->getModule('admin')->activeModules['article']->settings['enableTags']){
+            if(Yii::$app->getModule('admin')->getModule('article')->settings['enableTags']){
                 $with[] = 'tags';
             }
 

@@ -31,7 +31,7 @@ class Guestbook extends \yii\easyii2\components\ActiveRecord
             ['email', 'email'],
             ['title', 'string', 'max' => 128],
             ['reCaptcha', ReCaptchaValidator::className(), 'on' => 'send', 'when' => function(){
-                return Yii::$app->getModule('admin')->activeModules['guestbook']->settings['enableCaptcha'];
+                return Yii::$app->getModule('admin')->getModule('guestbook')->settings['enableCaptcha'];
             }],
         ];
     }
@@ -43,7 +43,7 @@ class Guestbook extends \yii\easyii2\components\ActiveRecord
                 $this->ip = Yii::$app->request->userIP;
                 $this->time = time();
                 $this->new = 1;
-                $this->status = Yii::$app->getModule('admin')->activeModules['guestbook']->settings['preModerate'] ? self::STATUS_OFF : self::STATUS_ON;
+                $this->status = Yii::$app->getModule('admin')->getModule('guestbook')->settings['preModerate'] ? self::STATUS_OFF : self::STATUS_ON;
             }
             return true;
         } else {
@@ -86,7 +86,7 @@ class Guestbook extends \yii\easyii2\components\ActiveRecord
 
     public function mailAdmin()
     {
-        $settings = Yii::$app->getModule('admin')->activeModules['guestbook']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('guestbook')->settings;
 
         if(!$settings['mailAdminOnNewPost']){
             return false;
@@ -104,7 +104,7 @@ class Guestbook extends \yii\easyii2\components\ActiveRecord
 
     public function notifyUser()
     {
-        $settings = Yii::$app->getModule('admin')->activeModules['guestbook']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('guestbook')->settings;
 
         return Mail::send(
             $this->email,

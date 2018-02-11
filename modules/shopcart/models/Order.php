@@ -30,8 +30,8 @@ class Order extends \yii\easyii2\components\ActiveRecord
     {
         return [
             [['name', 'address'], 'required', 'on' => 'confirm'],
-            ['email', 'required', 'when' => function($model){ return $model->scenario == 'confirm' && Yii::$app->getModule('admin')->activeModules['shopcart']->settings['enableEmail']; }],
-            ['phone', 'required', 'when' => function($model){ return $model->scenario == 'confirm' && Yii::$app->getModule('admin')->activeModules['shopcart']->settings['enablePhone']; }],
+            ['email', 'required', 'when' => function($model){ return $model->scenario == 'confirm' && Yii::$app->getModule('admin')->getModule('shopcart')->settings['enableEmail']; }],
+            ['phone', 'required', 'when' => function($model){ return $model->scenario == 'confirm' && Yii::$app->getModule('admin')->getModule('shopcart')->settings['enablePhone']; }],
             [['name', 'address', 'phone', 'comment'], 'trim'],
             ['email', 'email'],
             ['name', 'string', 'max' => 32],
@@ -138,7 +138,7 @@ class Order extends \yii\easyii2\components\ActiveRecord
 
     public function mailAdmin()
     {
-        $settings = Yii::$app->getModule('admin')->activeModules['shopcart']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('shopcart')->settings;
 
         if(!$settings['mailAdminOnNewOrder']){
             return false;
@@ -156,7 +156,7 @@ class Order extends \yii\easyii2\components\ActiveRecord
 
     public function notifyUser()
     {
-        $settings = Yii::$app->getModule('admin')->activeModules['shopcart']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('shopcart')->settings;
 
         return Mail::send(
             $this->email,

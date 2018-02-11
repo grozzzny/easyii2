@@ -35,7 +35,7 @@ class News extends \yii\easyii2\components\API
             $this->_items = [];
 
             $with = ['seo'];
-            if(Yii::$app->getModule('admin')->activeModules['news']->settings['enableTags']){
+            if(Yii::$app->getModule('admin')->getModule('news')->settings['enableTags']){
                 $with[] = 'tags';
             }
 
@@ -85,7 +85,7 @@ class News extends \yii\easyii2\components\API
         }
 
         $with = ['seo'];
-        if(Yii::$app->getModule('admin')->activeModules['news']->settings['enableTags']){
+        if(Yii::$app->getModule('admin')->getModule('news')->settings['enableTags']){
             $with[] = 'tags';
         }
 

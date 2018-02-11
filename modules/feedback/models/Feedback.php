@@ -34,7 +34,7 @@ class Feedback extends \yii\easyii2\components\ActiveRecord
             ['email', 'email'],
             ['phone', 'match', 'pattern' => '/^[\d\s-\+\(\)]+$/'],
             ['reCaptcha', ReCaptchaValidator::className(), 'when' => function($model){
-                return $model->isNewRecord && Yii::$app->getModule('admin')->activeModules['feedback']->settings['enableCaptcha'];
+                return $model->isNewRecord && Yii::$app->getModule('admin')->getModule('feedback')->settings['enableCaptcha'];
             }],
         ];
     }
@@ -90,8 +90,7 @@ class Feedback extends \yii\easyii2\components\ActiveRecord
 
     public function mailAdmin()
     {
-        $settings = Yii::$app->getModule('admin')->activeModules['feedback']->settings;
-
+        $settings = Yii::$app->getModule('admin')->getModule('feedback')->settings;
         if(!$settings['mailAdminOnNewFeedback']){
             return false;
         }
@@ -105,7 +104,7 @@ class Feedback extends \yii\easyii2\components\ActiveRecord
 
     public function sendAnswer()
     {
-        $settings = Yii::$app->getModule('admin')->activeModules['feedback']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('feedback')->settings;
 
         return Mail::send(
             $this->email,

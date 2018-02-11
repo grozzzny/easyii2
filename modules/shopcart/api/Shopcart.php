@@ -57,7 +57,7 @@ class Shopcart extends \yii\easyii2\components\API
     {
         $model = new Order;
         $model->scenario = 'confirm';
-        $settings = Yii::$app->getModule('admin')->activeModules['shopcart']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('shopcart')->settings;
         $options = array_merge($this->_defaultFormOptions, $options);
 
         ob_start();

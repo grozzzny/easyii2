@@ -30,7 +30,7 @@ class Feedback extends \yii\easyii2\components\API
     public function api_form($options = [])
     {
         $model = new FeedbackModel;
-        $settings = Yii::$app->getModule('admin')->activeModules['feedback']->settings;
+        $settings = Yii::$app->getModule('admin')->getModule('feedback')->settings;
         $options = array_merge($this->_defaultFormOptions, $options);
 
         ob_start();
