@@ -1,6 +1,6 @@
 <?php
 use yii\easyii2\assets\AdminLteAsset;
-use yii\easyii2\assets\AdminlteeasyiicmsAsset;
+use yii\easyii2\assets\AdminlteEasyiicmsAsset;
 use yii\helpers\Html;
 use yii\easyii2\assets\AdminAsset;
 
