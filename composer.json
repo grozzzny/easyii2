@@ -3,19 +3,14 @@
     "version": "dev-master",
     "description": "Easy CMS based on Yii2 Framework - Development package",
     "keywords": ["easyii2"],
-    "homepage": "http://easyii2cms.com",
+    "homepage": "http://easyiicms.com",
     "type": "yii2-extension",
     "license": "GNU GPL V3",
     "minimum-stability": "dev",
-    "support": {
-        "wiki": "http://easyii2cms.com/docs",
-        "source": "https://github.com/grozzzny/easyii2.git",
-        "issues": "https://github.com/grozzzny/easyii2/issues"
-    },
     "authors": [
         {
-            "name": "Ivan Vasilkov",
-            "email": "grozzznyhope@gmail.com",
+            "name": "Dmitriy Groznyy",
+            "email": "prkenig@gmail.com",
             "role" : "Developer"
         }
     ],
