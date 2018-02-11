@@ -10,7 +10,7 @@ use yii\easyii2\assets\AdminAsset;
 
 AdminAsset::register($this);
 $adminLteAsset = AdminLteAsset::register($this);
-AdminlteeasyiicmsAsset::register($this);
+AdminlteEasyiicmsAsset::register($this);
 
 ?>
 <?php $this->beginPage() ?>
