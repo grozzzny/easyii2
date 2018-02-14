@@ -13,6 +13,12 @@ use yii\helpers\Url;
  * @package yii\easyii2\modules\news\api
  *
  * @property-read PhotoObject[] $photos
+ * @property-read string $title
+ * @property-read string $short
+ * @property-read string $text
+ * @property-read string $date
+ * @property-read string $editLink
+ * @property-read array $tags
  */
 class NewsObject extends \yii\easyii2\components\ApiObject
 {
