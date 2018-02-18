@@ -9,6 +9,24 @@ use yii\easyii2\validators\ReCaptchaValidator;
 use yii\easyii2\validators\EscapeValidator;
 use yii\helpers\Url;
 
+
+/**
+ * Class Feedback
+ * @package yii\easyii2\modules\feedback\models
+ * 
+ * @property integer $feedback_id
+ * @property string $name
+ * @property string $email
+ * @property string $phone
+ * @property string $title
+ * @property string $text
+ * @property string $answer_subject
+ * @property string $answer_text
+ * @property integer $time
+ * @property string $ip
+ * @property integer $status
+ * 
+ */
 class Feedback extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_NEW = 0;
