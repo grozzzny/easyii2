@@ -27,7 +27,7 @@ class m000000_000000_install extends \yii\db\Migration
     {
         //ADMINS
         $this->createTable(models\Admin::tableName(), [
-            'admin_id' => 'pk',
+            'admin_id' => $this->primaryKey(),
             'username' => Schema::TYPE_STRING . '(32) NOT NULL',
             'password' => Schema::TYPE_STRING . '(64) NOT NULL',
             'auth_key' => Schema::TYPE_STRING . '(128) NOT NULL',
@@ -37,7 +37,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //LOGINFORM
         $this->createTable(models\LoginForm::tableName(), [
-            'log_id' => 'pk',
+            'log_id' => $this->primaryKey(),
             'username' => Schema::TYPE_STRING . '(128) NOT NULL',
             'password' => Schema::TYPE_STRING . '(128) NOT NULL',
             'ip' => Schema::TYPE_STRING . '(16) NOT NULL',
@@ -48,7 +48,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //MODULES
         $this->createTable(models\Module::tableName(), [
-            'module_id' => 'pk',
+            'module_id' => $this->primaryKey(),
             'name' => Schema::TYPE_STRING . '(64) NOT NULL',
             'class' => Schema::TYPE_STRING . '(128) NOT NULL',
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
@@ -62,7 +62,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //PHOTOS
         $this->createTable(models\Photo::tableName(), [
-            'photo_id' => 'pk',
+            'photo_id' => $this->primaryKey(),
             'class' => Schema::TYPE_STRING . '(128) NOT NULL',
             'item_id' => Schema::TYPE_INTEGER . " NOT NULL",
             'image' => Schema::TYPE_STRING . '(128) NOT NULL',
@@ -73,7 +73,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //SEOTEXT
         $this->createTable(models\SeoText::tableName(), [
-            'seotext_id' => 'pk',
+            'seotext_id' => $this->primaryKey(),
             'class' => Schema::TYPE_STRING . '(128) NOT NULL',
             'item_id' => Schema::TYPE_INTEGER . " NOT NULL",
             'h1' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
@@ -85,7 +85,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //SETTINGS
         $this->createTable(models\Setting::tableName(), [
-            'setting_id' => 'pk',
+            'setting_id' => $this->primaryKey(),
             'name' => Schema::TYPE_STRING . '(64) NOT NULL',
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'value' => Schema::TYPE_STRING . '(1024) NOT NULL',
@@ -95,7 +95,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //CAROUSEL MODULE
         $this->createTable(Carousel::tableName(), [
-            'carousel_id' => 'pk',
+            'carousel_id' => $this->primaryKey(),
             'image' => Schema::TYPE_STRING . '(128) NOT NULL',
             'link' => Schema::TYPE_STRING . '(255) NOT NULL',
             'title' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
@@ -106,7 +106,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //CATALOG MODULE
         $this->createTable(catalog\models\Category::tableName(), [
-            'category_id' => 'pk',
+            'category_id' => $this->primaryKey(),
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'image' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
             'fields' => Schema::TYPE_TEXT . ' NOT NULL',
@@ -121,7 +121,7 @@ class m000000_000000_install extends \yii\db\Migration
         $this->createIndex('slug', catalog\models\Category::tableName(), 'slug', true);
 
         $this->createTable(catalog\models\Item::tableName(), [
-            'item_id' => 'pk',
+            'item_id' => $this->primaryKey(),
             'category_id' => Schema::TYPE_INTEGER,
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'description' => Schema::TYPE_TEXT . ' DEFAULT NULL',
@@ -137,7 +137,7 @@ class m000000_000000_install extends \yii\db\Migration
         $this->createIndex('slug', catalog\models\Item::tableName(), 'slug', true);
 
         $this->createTable(catalog\models\ItemData::tableName(), [
-            'data_id' => 'pk',
+            'data_id' => $this->primaryKey(),
             'item_id' => Schema::TYPE_INTEGER,
             'name' => Schema::TYPE_STRING . '(128) NOT NULL',
             'value' => Schema::TYPE_STRING . '(1024) DEFAULT NULL',
@@ -147,7 +147,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //SHOPCART MODULE
         $this->createTable(shopcart\models\Order::tableName(), [
-            'order_id' => 'pk',
+            'order_id' => $this->primaryKey(),
             'name' => Schema::TYPE_STRING . '(64) NOT NULL',
             'address' => Schema::TYPE_STRING . '(255) NOT NULL',
             'phone' => Schema::TYPE_STRING . '(64) NOT NULL',
@@ -162,7 +162,7 @@ class m000000_000000_install extends \yii\db\Migration
         ], $this->engine);
 
         $this->createTable(shopcart\models\Good::tableName(), [
-            'good_id' => 'pk',
+            'good_id' => $this->primaryKey(),
             'order_id' => Schema::TYPE_INTEGER,
             'item_id' => Schema::TYPE_INTEGER,
             'count' => Schema::TYPE_INTEGER,
@@ -173,7 +173,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //FEEDBACK MODULE
         $this->createTable(Feedback::tableName(), [
-            'feedback_id' => 'pk',
+            'feedback_id' => $this->primaryKey(),
             'name' => Schema::TYPE_STRING . '(64) NOT NULL',
             'email' => Schema::TYPE_STRING . '(128) NOT NULL',
             'phone' => Schema::TYPE_STRING . '(64) DEFAULT NULL',
@@ -188,7 +188,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //FILE MODULE
         $this->createTable(File::tableName(), [
-            'file_id' => 'pk',
+            'file_id' => $this->primaryKey(),
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'file' => Schema::TYPE_STRING . '(255) NOT NULL',
             'size' => Schema::TYPE_INTEGER .  ' NOT NULL',
@@ -201,7 +201,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //GALLERY MODULE
         $this->createTable(gallery\models\Category::tableName(), [
-            'category_id' => 'pk',
+            'category_id' => $this->primaryKey(),
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'image' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
             'slug' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
@@ -216,7 +216,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //GUESTBOOK MODULE
         $this->createTable(Guestbook::tableName(), [
-            'guestbook_id' => 'pk',
+            'guestbook_id' => $this->primaryKey(),
             'name' => Schema::TYPE_STRING . '(128) NOT NULL',
             'title' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
             'text' => Schema::TYPE_TEXT . ' NOT NULL',
@@ -230,7 +230,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //NEWS MODULE
         $this->createTable(News::tableName(), [
-            'news_id' => 'pk',
+            'news_id' => $this->primaryKey(),
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'image' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
             'short' => Schema::TYPE_STRING . '(1024) DEFAULT NULL',
@@ -244,7 +244,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //ARTICLE MODULE
         $this->createTable(article\models\Category::tableName(), [
-            'category_id' => 'pk',
+            'category_id' => $this->primaryKey(),
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'image' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
             'order_num' => Schema::TYPE_INTEGER,
@@ -258,7 +258,7 @@ class m000000_000000_install extends \yii\db\Migration
         $this->createIndex('slug', article\models\Category::tableName(), 'slug', true);
 
         $this->createTable(article\models\Item::tableName(), [
-            'item_id' => 'pk',
+            'item_id' => $this->primaryKey(),
             'category_id' => Schema::TYPE_INTEGER,
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'image' => Schema::TYPE_STRING . '(128) DEFAULT NULL',
@@ -273,7 +273,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //PAGE MODULE
         $this->createTable(Page::tableName(), [
-            'page_id' => 'pk',
+            'page_id' => $this->primaryKey(),
             'title' => Schema::TYPE_STRING . '(128) NOT NULL',
             'text' => Schema::TYPE_TEXT . ' NOT NULL',
             'slug' => Schema::TYPE_STRING . '(128) DEFAULT NULL'
@@ -282,7 +282,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //FAQ MODULE
         $this->createTable(Faq::tableName(), [
-            'faq_id' => 'pk',
+            'faq_id' => $this->primaryKey(),
             'question' => Schema::TYPE_TEXT . ' NOT NULL',
             'answer' => Schema::TYPE_TEXT . ' NOT NULL',
             'order_num' => Schema::TYPE_INTEGER,
@@ -291,7 +291,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //SUBSCRIBE MODULE
         $this->createTable(Subscriber::tableName(), [
-            'subscriber_id' => 'pk',
+            'subscriber_id' => $this->primaryKey(),
             'email' => Schema::TYPE_STRING . '(128) NOT NULL',
             'ip' => Schema::TYPE_STRING . '(16) NOT NULL',
             'time' => Schema::TYPE_INTEGER .  " DEFAULT '0'"
@@ -299,7 +299,7 @@ class m000000_000000_install extends \yii\db\Migration
         $this->createIndex('email', Subscriber::tableName(), 'email', true);
 
         $this->createTable(History::tableName(), [
-            'history_id' => 'pk',
+            'history_id' => $this->primaryKey(),
             'subject' => Schema::TYPE_STRING . '(128) NOT NULL',
             'body' => Schema::TYPE_TEXT . ' NOT NULL',
             'sent' => Schema::TYPE_INTEGER .  " DEFAULT '0'",
@@ -308,7 +308,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //TEXT MODULE
         $this->createTable(Text::tableName(), [
-            'text_id' => 'pk',
+            'text_id' => $this->primaryKey(),
             'text' => Schema::TYPE_TEXT . ' NOT NULL',
             'slug' => Schema::TYPE_STRING . '(128) DEFAULT NULL'
         ], $this->engine);
@@ -316,7 +316,7 @@ class m000000_000000_install extends \yii\db\Migration
 
         //Tags
         $this->createTable(models\Tag::tableName(), [
-            'tag_id' => 'pk',
+            'tag_id' => $this->primaryKey(),
             'name' => Schema::TYPE_STRING . '(128) NOT NULL',
             'frequency' => Schema::TYPE_INTEGER . " DEFAULT '0'"
         ], $this->engine);
