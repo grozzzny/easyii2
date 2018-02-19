@@ -42,7 +42,7 @@ class AdminModule extends \yii\base\Module implements BootstrapInterface
             throw new \yii\web\ServerErrorHttpException('Please configure Cache component.');
         }
 
-        $this->activeModules = Module::findAllActive();
+        $this->activeModules = $this->installed ? Module::findAllActive() : [];
 
         $modules = [];
         foreach ($this->activeModules as $name => $module) {

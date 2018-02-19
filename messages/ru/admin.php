@@ -1,5 +1,6 @@
 <?php
 return [
+    'No connection to the database' => 'Нет соединения с базой данных',
     'Control Panel' => 'Панель управления',
     'Welcome' => 'Добро пожаловать',
     'Welcome to control panel, choose which section you want to manage in left menu.' => 'Добро пожаловать в панель управления, выберите в левом меню раздел, который хотите редактировать.',
