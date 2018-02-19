@@ -6,6 +6,19 @@ use yii\behaviors\SluggableBehavior;
 use yii\easyii2\behaviors\SeoBehavior;
 use yii\easyii2\behaviors\SortableModel;
 
+/**
+ * Class File
+ * @package yii\easyii2\modules\file\models
+ *
+ * @property int $file_id [int(11)]
+ * @property string $title [varchar(128)]
+ * @property string $file [varchar(255)]
+ * @property int $size [int(11)]
+ * @property string $slug [varchar(128)]
+ * @property int $downloads [int(11)]
+ * @property int $time [int(11)]
+ * @property int $order_num [int(11)]
+ */
 class File extends \yii\easyii2\components\ActiveRecord
 {
     public static function tableName()

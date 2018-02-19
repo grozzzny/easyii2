@@ -21,6 +21,8 @@ use yii\helpers\StringHelper;
  * @property integer $time
  * @property integer $views
  * @property boolean $status
+ *
+ * @property string $tagNames
  */
 class News extends \yii\easyii2\components\ActiveRecord
 {

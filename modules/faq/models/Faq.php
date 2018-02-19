@@ -5,6 +5,16 @@ use Yii;
 use yii\easyii2\behaviors\CacheFlush;
 use yii\easyii2\behaviors\SortableModel;
 
+/**
+ * Class Faq
+ * @package yii\easyii2\modules\faq\models
+ *
+ * @property int $faq_id [int(11)]
+ * @property string $question
+ * @property string $answer
+ * @property int $order_num [int(11)]
+ * @property bool $status [tinyint(1)]
+ */
 class Faq extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;

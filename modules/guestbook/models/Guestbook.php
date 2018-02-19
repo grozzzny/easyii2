@@ -9,6 +9,21 @@ use yii\easyii2\validators\ReCaptchaValidator;
 use yii\easyii2\validators\EscapeValidator;
 use yii\helpers\Url;
 
+/**
+ * Class Guestbook
+ * @package yii\easyii2\modules\guestbook\models
+ *
+ * @property int $guestbook_id [int(11)]
+ * @property string $name [varchar(128)]
+ * @property string $title [varchar(128)]
+ * @property string $text
+ * @property string $answer
+ * @property string $email [varchar(128)]
+ * @property int $time [int(11)]
+ * @property string $ip [varchar(16)]
+ * @property bool $new [tinyint(1)]
+ * @property bool $status [tinyint(1)]
+ */
 class Guestbook extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;

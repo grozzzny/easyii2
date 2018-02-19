@@ -5,6 +5,18 @@ use Yii;
 use yii\easyii2\behaviors\CacheFlush;
 use yii\easyii2\behaviors\SortableModel;
 
+/**
+ * Class Carousel
+ * @package yii\easyii2\modules\carousel\models
+ *
+ * @property int $carousel_id [int(11)]
+ * @property string $image [varchar(128)]
+ * @property string $link [varchar(255)]
+ * @property string $title [varchar(128)]
+ * @property string $text
+ * @property int $order_num [int(11)]
+ * @property bool $status [tinyint(1)]
+ */
 class Carousel extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;

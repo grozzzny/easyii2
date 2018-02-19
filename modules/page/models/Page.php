@@ -11,7 +11,7 @@ use yii\easyii2\behaviors\SeoBehavior;
  * @property integer $page_id
  * @property string $title
  * @property string $text
- * @property slug $string
+ * @property string $slug
  */
 class Page extends \yii\easyii2\components\ActiveRecord
 {

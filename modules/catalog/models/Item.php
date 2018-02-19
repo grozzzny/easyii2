@@ -6,6 +6,23 @@ use yii\behaviors\SluggableBehavior;
 use yii\easyii2\behaviors\SeoBehavior;
 use yii\easyii2\models\Photo;
 
+/**
+ * Class Item
+ * @package yii\easyii2\modules\catalog\models
+ *
+ * @property int $item_id [int(11)]
+ * @property int $category_id [int(11)]
+ * @property string $title [varchar(128)]
+ * @property string $description
+ * @property int $available [int(11)]
+ * @property float $price [float]
+ * @property int $discount [int(11)]
+ * @property string $data
+ * @property string $image [varchar(128)]
+ * @property string $slug [varchar(128)]
+ * @property int $time [int(11)]
+ * @property bool $status [tinyint(1)]
+ */
 class Item extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;

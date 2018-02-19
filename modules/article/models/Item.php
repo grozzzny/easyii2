@@ -27,6 +27,8 @@ use yii\helpers\StringHelper;
  *
  * @property-ready Category $category
  * @property-ready Photo[] $photos
+ *
+ * @property string $tagNames
  */
 class Item extends \yii\easyii2\components\ActiveRecord
 {
