@@ -1,5 +1,9 @@
 <?php
 return [
+    'Name' => 'Наименование',
+    'Index sort' => 'Индекс сортировки',
+    'Status' => 'Активно',
+    'Seacrh...' => 'Поиск...',
     'No connection to the database' => 'Нет соединения с базой данных',
     'Control Panel' => 'Панель управления',
     'Welcome' => 'Добро пожаловать',

@@ -1,14 +1,14 @@
 <?php
 namespace yii\easyii2\controllers;
 
-use grozzzny\base_module\BaseModel;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\easyii2\behaviors\SortableController;
+use yii\easyii2\components\FastModel;
 use yii\easyii2\components\FastModule;
 use yii\widgets\ActiveForm;
 
-use yii\easyii\components\Controller;
+use yii\easyii2\components\Controller;
 
 /**
  * Class FastController
@@ -264,7 +264,7 @@ class FastController extends Controller
      */
     public function actionOn($slug, $id)
     {
-        return $this->changeStatus($slug, $id, BaseModel::STATUS_ON);
+        return $this->changeStatus($slug, $id, FastModel::STATUS_ON);
     }
 
 
@@ -276,7 +276,7 @@ class FastController extends Controller
      */
     public function actionOff($slug, $id)
     {
-        return $this->changeStatus($slug, $id, BaseModel::STATUS_OFF);
+        return $this->changeStatus($slug, $id, FastModel::STATUS_OFF);
     }
 
     /**
