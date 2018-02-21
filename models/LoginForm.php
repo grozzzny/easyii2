@@ -7,6 +7,18 @@ use yii\easyii2\components\ActiveRecord;
 
 use yii\easyii2\validators\EscapeValidator;
 
+/**
+ * Class LoginForm
+ * @package yii\easyii2\models
+ *
+ * @property int $log_id [int(11)]
+ * @property string $username [varchar(128)]
+ * @property string $password [varchar(128)]
+ * @property string $ip [varchar(16)]
+ * @property string $user_agent [varchar(1024)]
+ * @property int $time [int(11)]
+ * @property bool $success [tinyint(1)]
+ */
 class LoginForm extends ActiveRecord
 {
     const CACHE_KEY = 'SIGNIN_TRIES';

@@ -6,6 +6,16 @@ use Yii;
 use yii\easyii2\helpers\Data;
 use yii\easyii2\behaviors\CacheFlush;
 
+/**
+ * Class Setting
+ * @package yii\easyii2\models
+ *
+ * @property int $setting_id [int(11)]
+ * @property string $name [varchar(64)]
+ * @property string $title [varchar(128)]
+ * @property string $value [varchar(1024)]
+ * @property bool $visibility [tinyint(1)]
+ */
 class Setting extends \yii\easyii2\components\ActiveRecord
 {
     const VISIBLE_NONE = 0;

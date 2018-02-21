@@ -24,7 +24,9 @@ class Redactor extends InputWidget
     private $_defaultOptions = [
         'imageUpload' => '/admin/redactor/upload',
         'fileUpload' => '/admin/redactor/upload',
-        'formatting' => ['blockquote', 'h2', 'p'],
+       // 'formatting' => ['blockquote', 'h2', 'p'],
+        'imagePosition' => true,
+        'imageResizable' => true
     ];
     private $_assetBundle;
 
@@ -46,7 +48,7 @@ class Redactor extends InputWidget
 
     public function run()
     {
-        echo Html::beginTag('div', ['id' => $this->idBox, 'style' => 'position: relative; height: '.$this->options['minHeight'].'px; overflow: auto;']);
+        echo Html::beginTag('div', ['id' => $this->idBox, 'style' => 'position: relative; overflow: auto;']);
         echo Html::activeTextarea($this->model, $this->attribute);
         echo Html::endTag('div');
     }

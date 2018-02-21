@@ -9,8 +9,8 @@ class RedactorAsset extends \yii\web\AssetBundle
 
     public function init()
     {
-        $this->js[] = 'redactor2.js';
-        $this->css[] = 'redactor2.css';
+        $this->js[] = 'redactor.js';
+        $this->css[] = 'redactor.css';
     }
 
 }
