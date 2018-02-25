@@ -43,11 +43,11 @@ class WebConsole
         return self::$_console;
     }
 
-    public static function migrate($migrationPath = '@easyii2/migrations/', $migrationTable = 'easyii2_migration')
+    public static function migrate($migrationPath = '@easyii2/migrations/')
     {
         ob_start();
 
-        self::console()->runAction('migrate', ['migrationPath' => $migrationPath, 'migrationTable' => $migrationTable, 'interactive' => false]);
+        self::console()->runAction('migrate', ['migrationPath' => $migrationPath, 'interactive' => false]);
 
         $result = file_get_contents(self::$logFile) . "\n" . ob_get_clean();
 
