@@ -3,10 +3,14 @@ namespace yii\easyii2\controllers;
 
 
 
+use Yii;
+use yii\base\Model;
+use yii\bootstrap\ActiveForm;
 use yii\easyii2\components\FastModel;
 use yii\easyii2\components\FastModelInterface;
 use yii\easyii2\helpers\Image;
 use yii\easyii2\helpers\Upload;
+use yii\web\Response;
 use yii\web\UploadedFile;
 
 trait TraitController
@@ -37,4 +41,14 @@ trait TraitController
         }
     }
 
+
+    public function performAjaxValidation(Model $model)
+    {
+        if (\Yii::$app->request->isAjax && $model->load(\Yii::$app->request->post())) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            \Yii::$app->response->data   = ActiveForm::validate($model);
+            \Yii::$app->response->send();
+            \Yii::$app->end();
+        }
+    }
 }

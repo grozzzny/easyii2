@@ -1,6 +1,8 @@
 <?php
 namespace yii\easyii2\modules\shopcart;
 
+use Yii;
+
 class ShopcartModule extends \yii\easyii2\components\Module
 {
     public $settings = [
@@ -22,4 +24,17 @@ class ShopcartModule extends \yii\easyii2\components\Module
         'icon' => 'shopping-cart',
         'order_num' => 120,
     ];
+
+
+    public static function registerTranslation()
+    {
+        Yii::$app->i18n->translations['easyii2/shopcart*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => 'en-US',
+            'basePath' => '@easyii2/modules/shopcart/messages',
+            'fileMap' => [
+                'easyii2/shopcart' => 'admin.php',
+            ]
+        ];
+    }
 }
