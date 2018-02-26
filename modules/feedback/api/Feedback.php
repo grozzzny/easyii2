@@ -22,7 +22,7 @@ class Feedback extends \yii\easyii2\components\API
 {
     const SENT_VAR = 'feedback_sent';
 
-    private $_defaultFormOptions = [
+    protected $_defaultFormOptions = [
         'errorUrl' => '',
         'successUrl' => ''
     ];
