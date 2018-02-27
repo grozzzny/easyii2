@@ -8,6 +8,23 @@ use yii\easyii2\models\Setting;
 use yii\easyii2\validators\EscapeValidator;
 use yii\helpers\Url;
 
+/**
+ * Class Order
+ * @package yii\easyii2\modules\shopcart\models
+ *
+ * @property int $order_id [int(11)]
+ * @property string $name [varchar(64)]
+ * @property string $address [varchar(255)]
+ * @property string $phone [varchar(64)]
+ * @property string $email [varchar(128)]
+ * @property string $comment [varchar(1024)]
+ * @property string $remark [varchar(1024)]
+ * @property string $access_token [varchar(32)]
+ * @property string $ip [varchar(16)]
+ * @property int $time [int(11)]
+ * @property bool $new [tinyint(1)]
+ * @property bool $status [tinyint(1)]
+ */
 class Order extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_BLANK = 0;
