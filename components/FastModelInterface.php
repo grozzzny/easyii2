@@ -17,4 +17,6 @@ interface FastModelInterface
     public static function querySort(BaseDataProvider &$provider);
     public static function getNameModel();
     public static function getSlugModel();
+    public function enablePhotoManager();
+    public function getPhotos();
 }

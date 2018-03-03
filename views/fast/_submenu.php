@@ -17,16 +17,16 @@ $module = $this->context->module->id;
         </a>
     </li>
 
-<? if(false):?>
-
-    <? if($model::SUBMENU_PHOTOS): ?>
-    <li <?= ($action === 'photos') ? 'class="active"' : '' ?>>
-        <a href="<?= Url::to(['/admin/'.$module.'/a/photos', 'id' => $model->primaryKey, 'slug' => $model::getSlugModel()]) ?>">
-            <span class="glyphicon glyphicon-camera"></span>
-            <?= Yii::t('easyii', 'Photos') ?>
-        </a>
-    </li>
+    <? if($model->enablePhotoManager()): ?>
+        <li <?= ($action === 'photos') ? 'class="active"' : '' ?>>
+            <a href="<?= Url::to(['/admin/'.$module.'/a/photos', 'id' => $model->primaryKey, 'slug' => $model::getSlugModel()]) ?>">
+                <span class="glyphicon glyphicon-camera"></span>
+                <?= Yii::t('easyii2', 'Photos') ?>
+            </a>
+        </li>
     <? endif;?>
+
+<? if(false):?>
 
     <? if($model::SUBMENU_FILES): ?>
         <li <?= ($action === 'files') ? 'class="active"' : '' ?>>

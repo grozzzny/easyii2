@@ -1,5 +1,5 @@
 <?php
-use yii\easyii\widgets\Photos;
+use yii\easyii2\widgets\Photos;
 use yii\web\View;
 /**
  * @var View $this
