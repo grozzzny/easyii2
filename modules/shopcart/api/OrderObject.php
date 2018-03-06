@@ -1,6 +1,7 @@
 <?php
 namespace yii\easyii2\modules\shopcart\api;
 
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\modules\shopcart\models\Good;
 
 class OrderObject extends \yii\easyii2\components\ApiObject
@@ -18,8 +19,11 @@ class OrderObject extends \yii\easyii2\components\ApiObject
     {
         if(!$this->_goods){
             $this->_goods = [];
+
+            $model =  ActiveRecord::getModelByName('Good', 'shopcart');
+
             if($this->id){
-                foreach(Good::find()->where(['order_id' => $this->id])->with('item')->all() as $good){
+                foreach($model::find()->where(['order_id' => $this->id])->with('item')->all() as $good){
                     $this->_goods[] = new GoodObject($good);
                 }
             }
