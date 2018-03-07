@@ -96,19 +96,19 @@ class Module extends \yii\base\Module implements ModuleDBEasyii2Interface
     public function getTitle()
     {
         // TODO: Implement getTitle() method.
-        return $this->model->title;
+        return empty($this->model->title) ? $this->id : $this->model->title;
     }
 
     public function getName()
     {
         // TODO: Implement getName() method.
-        return $this->model->name;
+        return empty($this->model->name) ? $this->id : $this->model->name;
     }
 
     public function getIcon()
     {
         // TODO: Implement getIcon() method.
-        return $this->model->icon;
+        return empty($this->model->icon) ? 'globe' : $this->model->icon;
     }
 
     public function getModel()
