@@ -4,6 +4,7 @@ namespace yii\easyii2\modules\shopcart\controllers;
 use Yii;
 use yii\data\ActiveDataProvider;
 
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\Controller;
 use yii\easyii2\modules\shopcart\models\Good;
 use yii\easyii2\modules\shopcart\models\Order;
@@ -14,20 +15,37 @@ class AController extends Controller
     public $processed = 0;
     public $sent = 0;
 
+    /**
+     * @var Order
+     */
+    private $order;
+
+    /**
+     * @var Good
+     */
+    private $good;
+
     public function init()
     {
         parent::init();
 
-        $this->pending = Order::find()->status(Order::STATUS_PENDING)->count();
-        $this->processed = Order::find()->status(Order::STATUS_PROCESSED)->count();
-        $this->sent = Order::find()->status(Order::STATUS_SENT)->count();
+        $this->good =  ActiveRecord::getModelByName('Good', 'shopcart');
+        $this->order =  ActiveRecord::getModelByName('Order', 'shopcart');
+
+        $model = $this->order;
+
+        $this->pending = $model::find()->status($model::STATUS_PENDING)->count();
+        $this->processed = $model::find()->status($model::STATUS_PROCESSED)->count();
+        $this->sent = $model::find()->status($model::STATUS_SENT)->count();
     }
 
     public function actionIndex()
     {
+        $model = $this->order;
+
         return $this->render('index', [
             'data' => new ActiveDataProvider([
-                'query' => Order::find()->with('goods')->status(Order::STATUS_PENDING)->asc(),
+                'query' => $model::find()->with('goods')->status($model::STATUS_PENDING)->asc(),
                 'totalCount' => $this->pending
             ])
         ]);
@@ -35,10 +53,11 @@ class AController extends Controller
 
     public function actionProcessed()
     {
+        $model = $this->order;
         $this->setReturnUrl();
         return $this->render('index', [
             'data' => new ActiveDataProvider([
-                'query' => Order::find()->with('goods')->status(Order::STATUS_PROCESSED)->asc(),
+                'query' => $model::find()->with('goods')->status($model::STATUS_PROCESSED)->asc(),
                 'totalCount' => $this->processed
             ])
         ]);
@@ -46,10 +65,11 @@ class AController extends Controller
 
     public function actionSent()
     {
+        $model = $this->order;
         $this->setReturnUrl();
         return $this->render('index', [
             'data' => new ActiveDataProvider([
-                'query' => Order::find()->with('goods')->status(Order::STATUS_SENT)->asc(),
+                'query' => $model::find()->with('goods')->status($model::STATUS_SENT)->asc(),
                 'totalCount' => $this->sent
             ])
         ]);
@@ -57,38 +77,43 @@ class AController extends Controller
 
     public function actionCompleted()
     {
+        $model = $this->order;
         $this->setReturnUrl();
         return $this->render('index', [
             'data' => new ActiveDataProvider([
-                'query' => Order::find()->with('goods')->status(Order::STATUS_COMPLETED)->desc()
+                'query' => $model::find()->with('goods')->status($model::STATUS_COMPLETED)->desc()
             ])
         ]);
     }
 
     public function actionFails()
     {
+        $model = $this->order;
         $this->setReturnUrl();
         return $this->render('index', [
             'data' => new ActiveDataProvider([
-                'query' => Order::find()->with('goods')->where(['in', 'status', [Order::STATUS_DECLINED, Order::STATUS_ERROR, Order::STATUS_RETURNED]])->desc()
+                'query' => $model::find()->with('goods')->where(['in', 'status', [$model::STATUS_DECLINED, $model::STATUS_ERROR, $model::STATUS_RETURNED]])->desc()
             ])
         ]);
     }
 
     public function actionBlank()
     {
+        $model = $this->order;
         $this->setReturnUrl();
         return $this->render('index', [
             'data' => new ActiveDataProvider([
-                'query' => Order::find()->with('goods')->status(Order::STATUS_BLANK)->desc()
+                'query' => $model::find()->with('goods')->status($model::STATUS_BLANK)->desc()
             ])
         ]);
     }
 
     public function actionView($id)
     {
+        $order = $this->order;
+        $good = $this->good;
         $request = Yii::$app->request;
-        $order = Order::findOne($id);
+        $order = $order::findOne($id);
 
         if($order === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -120,7 +145,7 @@ class AController extends Controller
                 $order->update();
             }
 
-            $goods = Good::find()->where(['order_id' => $order->primaryKey])->with('item')->asc()->all();
+            $goods = $good::find()->where(['order_id' => $order->primaryKey])->with('item')->asc()->all();
 
             return $this->render('view', [
                 'order' => $order,
@@ -131,7 +156,8 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Order::findOne($id))){
+        $model = $this->order;
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');

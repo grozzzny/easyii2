@@ -12,6 +12,8 @@ class ShopcartModule extends \yii\easyii2\components\Module
         'subjectNotifyUser' => 'Your order status changed',
         'templateNotifyUser' => '@easyii2/modules/shopcart/mail/en/notify_user',
         'frontendShopcartRoute' => '/shopcart/order',
+        'modelOrder' => '\yii\easyii2\modules\shopcart\models\Order',
+        'modelGood' => '\yii\easyii2\modules\shopcart\models\Good',
         'enablePhone' => true,
         'enableEmail' => true
     ];

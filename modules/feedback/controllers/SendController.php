@@ -11,6 +11,7 @@ class SendController extends \yii\web\Controller
         $model = new FeedbackModel;
 
         $request = Yii::$app->request;
+
         if ($model->load($request->post())) {
             $returnUrl = $model->save() ? $request->post('successUrl') : $request->post('errorUrl');
             return $this->redirect($returnUrl);

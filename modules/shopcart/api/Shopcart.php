@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\shopcart\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\modules\catalog\models\Item;
 use yii\easyii2\modules\shopcart\models\Good;
 use yii\easyii2\modules\shopcart\models\Order;
@@ -49,13 +50,14 @@ class Shopcart extends \yii\easyii2\components\API
 
     public function api_order($id)
     {
-        $order = Order::findOne($id);
+        $model =  ActiveRecord::getModelByName('Order', 'shopcart');
+        $order = $model::findOne($id);
         return $order ? new OrderObject($order) : null;
     }
 
     public function api_form($options = [])
     {
-        $model = new Order;
+        $model = ActiveRecord::getModelByName('Order', 'shopcart');
         $model->scenario = 'confirm';
         $settings = Yii::$app->getModule('admin')->getModule('shopcart')->settings;
         $options = array_merge($this->_defaultFormOptions, $options);
@@ -109,7 +111,8 @@ class Shopcart extends \yii\easyii2\components\API
         if($good) {
             $good->count += $count;
         } else {
-            $good = new Good([
+            $model =  ActiveRecord::getModelByName('Order', 'shopcart');
+            $good = new $model([
                 'order_id' => $this->order->id,
                 'item_id' => $item->primaryKey,
                 'count' => (int)$count,
@@ -142,7 +145,8 @@ class Shopcart extends \yii\easyii2\components\API
 
     public function api_remove($good_id)
     {
-        $good = Good::findOne($good_id);
+        $model =  ActiveRecord::getModelByName('Order', 'shopcart');
+        $good = $model::findOne($good_id);
         if(!$good){
             return ['result' => 'error', 'code' => 1, 'error' => 'Good not found'];
         }
@@ -204,7 +208,7 @@ class Shopcart extends \yii\easyii2\components\API
             $access_token = $this->token;
 
             if(!$access_token || !($order = Order::find()->where(['access_token' => $access_token])->status(Order::STATUS_BLANK)->one())){
-                $order = new Order();
+                $order = ActiveRecord::getModelByName('Order', 'shopcart');
             }
 
             $this->_order = new OrderObject($order);
