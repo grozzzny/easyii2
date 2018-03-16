@@ -30,7 +30,7 @@ class File extends \yii\easyii2\components\ActiveRecord
     {
         return [
             ['file', 'file'],
-            ['title', 'required'],
+            [['title', 'slug'], 'required'],
             ['title', 'string', 'max' => 128],
             ['title', 'trim'],
             ['slug', 'match', 'pattern' => self::$SLUG_PATTERN, 'message' => Yii::t('easyii2', 'Slug can contain only 0-9, a-z and "-" characters (max: 128).')],
@@ -54,11 +54,6 @@ class File extends \yii\easyii2\components\ActiveRecord
         return [
             SortableModel::className(),
             'seoBehavior' => SeoBehavior::className(),
-            'sluggable' => [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'title',
-                'ensureUnique' => true
-            ]
         ];
     }
 
