@@ -3,7 +3,8 @@ namespace yii\easyii2\assets;
 
 class DateTimePickerAsset extends \yii\web\AssetBundle
 {
-    public $sourcePath = '@bower';
+    public $sourcePath = '@easyii2/assets/datetimepicker';
+    //public $sourcePath = '@bower';
     public $depends = [
         'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
