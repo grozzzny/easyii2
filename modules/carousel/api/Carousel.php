@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\carousel\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\API;
 use yii\easyii2\helpers\Data;
 use yii\easyii2\modules\carousel\models\Carousel as CarouselModel;
@@ -25,9 +26,10 @@ class Carousel extends API
     {
         parent::init();
 
-        $this->_items = Data::cache(CarouselModel::CACHE_KEY, 3600, function(){
+        $this->_items = Data::cache([CarouselModel::CACHE_KEY, Yii::$app->language], 3600, function(){
             $items = [];
-            foreach(CarouselModel::find()->status(CarouselModel::STATUS_ON)->sort()->all() as $item){
+            $model = ActiveRecord::getModelByName('Carousel', 'carousel');
+            foreach($model::find()->status(CarouselModel::STATUS_ON)->sort()->all() as $item){
                 $items[] = new CarouselObject($item);
             }
             return $items;

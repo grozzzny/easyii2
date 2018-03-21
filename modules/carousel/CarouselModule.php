@@ -6,6 +6,7 @@ class CarouselModule extends \yii\easyii2\components\Module
     public $settings = [
         'enableTitle' => true,
         'enableText' => true,
+        'modelCarousel' => '\yii\easyii2\modules\carousel\models\Carousel',
     ];
 
     public static $installConfig = [

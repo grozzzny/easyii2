@@ -3,6 +3,7 @@ namespace yii\easyii2\modules\carousel\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\easyii2\components\ActiveRecord;
 use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
 
@@ -31,8 +32,10 @@ class AController extends Controller
 
     public function actionIndex()
     {
+        $model = ActiveRecord::getModelByName('Carousel', 'carousel');
+
         $data = new ActiveDataProvider([
-            'query' => Carousel::find()->sort(),
+            'query' => $model::find()->sort(),
         ]);
         return $this->render('index', [
             'data' => $data
@@ -41,7 +44,10 @@ class AController extends Controller
 
     public function actionCreate()
     {
-        $model = new Carousel;
+        /**
+         * @var Carousel $model
+         */
+        $model = ActiveRecord::getModelByName('Carousel', 'carousel');
 
         if ($model->load(Yii::$app->request->post())) {
             if(Yii::$app->request->isAjax){
@@ -83,7 +89,8 @@ class AController extends Controller
 
     public function actionEdit($id)
     {
-        $model = Carousel::findOne($id);
+        $model = ActiveRecord::getModelByName('Carousel', 'carousel');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -129,7 +136,8 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Carousel::findOne($id))){
+        $model = ActiveRecord::getModelByName('Carousel', 'carousel');
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');
