@@ -8,7 +8,8 @@ class AdminAsset extends \yii\web\AssetBundle
         'css/admin.css',
     ];
     public $js = [
-        'js/admin.js'
+        'js/admin.js',
+        'js/translit.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',

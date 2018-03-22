@@ -92,6 +92,18 @@ $(function(){
     });
 
     window.notify = new Notify();
+
+
+    (function () {
+        var $slug = $("[name*='slug']"),
+            $title = $("[name*='title']");
+        if ($slug.length == 0 || $title.length == 0) return false;
+
+        $title.on('blur', function () {
+            if ($slug.val() == '') $slug.val(translit(this.value));
+        });
+    })();
+
 });
 
 var Notify = function() {

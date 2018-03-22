@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\article\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\API;
 use yii\easyii2\models\Photo;
 use yii\easyii2\modules\article\models\Item;
@@ -69,8 +70,8 @@ class ArticleObject extends \yii\easyii2\components\ApiObject
     {
         if(!$this->_photos){
             $this->_photos = [];
-
-            foreach(Photo::find()->where(['class' => Item::className(), 'item_id' => $this->id])->sort()->all() as $model){
+            $model = ActiveRecord::getModelByName('Item', 'article');
+            foreach(Photo::find()->where(['class' => $model::className(), 'item_id' => $this->id])->sort()->all() as $model){
                 $this->_photos[] = new PhotoObject($model);
             }
         }
