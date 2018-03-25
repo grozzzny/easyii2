@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\feedback\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\modules\feedback\models\Feedback as FeedbackModel;
 
 use yii\helpers\Html;
@@ -29,7 +30,7 @@ class Feedback extends \yii\easyii2\components\API
 
     public function api_form($options = [])
     {
-        $model = new FeedbackModel;
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
         $settings = Yii::$app->getModule('admin')->getModule('feedback')->settings;
         $options = array_merge($this->_defaultFormOptions, $options);
 
@@ -60,7 +61,8 @@ class Feedback extends \yii\easyii2\components\API
 
     public function api_save($data)
     {
-        $model = new FeedbackModel($data);
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
+        $model->setAttributes($data);
         if($model->save()){
             return ['result' => 'success'];
         } else {

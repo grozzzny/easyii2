@@ -2,13 +2,14 @@
 namespace yii\easyii2\modules\feedback\controllers;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\modules\feedback\models\Feedback as FeedbackModel;
 
 class SendController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $model = new FeedbackModel;
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
 
         $request = Yii::$app->request;
 

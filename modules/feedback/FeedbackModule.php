@@ -17,6 +17,8 @@ class FeedbackModule extends \yii\easyii2\components\Module
         'enableTitle' => false,
         'enablePhone' => true,
         'enableCaptcha' => false,
+
+        'modelFeedback' => '\yii\easyii2\modules\feedback\models\Feedback',
     ];
 
     public static $installConfig = [

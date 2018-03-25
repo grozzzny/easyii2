@@ -4,6 +4,7 @@ namespace yii\easyii2\modules\feedback\controllers;
 use Yii;
 use yii\data\ActiveDataProvider;
 
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\Controller;
 use yii\easyii2\models\Setting;
 use yii\easyii2\modules\feedback\models\Feedback;
@@ -18,13 +19,17 @@ class AController extends Controller
         parent::init();
 
         $this->new = Yii::$app->getModule('admin')->getModule('feedback')->notice;
-        $this->noAnswer = Feedback::find()->status(Feedback::STATUS_VIEW)->count();
+
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
+
+        $this->noAnswer = $model::find()->status(Feedback::STATUS_VIEW)->count();
     }
 
     public function actionIndex()
     {
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
         $data = new ActiveDataProvider([
-            'query' => Feedback::find()->status(Feedback::STATUS_NEW)->asc(),
+            'query' => $model::find()->status(Feedback::STATUS_NEW)->asc(),
         ]);
         return $this->render('index', [
             'data' => $data
@@ -34,9 +39,9 @@ class AController extends Controller
     public function actionNoanswer()
     {
         $this->setReturnUrl();
-
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
         $data = new ActiveDataProvider([
-            'query' => Feedback::find()->status(Feedback::STATUS_VIEW)->asc(),
+            'query' => $model::find()->status(Feedback::STATUS_VIEW)->asc(),
         ]);
         return $this->render('index', [
             'data' => $data
@@ -46,9 +51,9 @@ class AController extends Controller
     public function actionAll()
     {
         $this->setReturnUrl();
-
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
         $data = new ActiveDataProvider([
-            'query' => Feedback::find()->desc(),
+            'query' => $model::find()->desc(),
         ]);
         return $this->render('index', [
             'data' => $data
@@ -57,7 +62,8 @@ class AController extends Controller
 
     public function actionView($id)
     {
-        $model = Feedback::findOne($id);
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -105,7 +111,8 @@ class AController extends Controller
 
     public function actionSetAnswer($id)
     {
-        $model = Feedback::findOne($id);
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -124,7 +131,8 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Feedback::findOne($id))){
+        $model =  ActiveRecord::getModelByName('Feedback', 'feedback');
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');
