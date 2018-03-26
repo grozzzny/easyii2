@@ -3,6 +3,7 @@ namespace yii\easyii2\modules\gallery\api;
 
 use Yii;
 
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\models\Photo;
 use yii\easyii2\modules\gallery\models\Category;
 use yii\easyii2\widgets\Fancybox;
@@ -54,8 +55,8 @@ class Gallery extends \yii\easyii2\components\API
         }
 
         $result = [];
-
-        $query = Photo::find()->where(['class' => Category::className()])->sort()->limit($limit);
+        $modelPhoto = ActiveRecord::getModelByName('Photo', 'admin');
+        $query = $modelPhoto::find()->where(['class' => Category::className()])->sort()->limit($limit);
         if($where){
             $query->andWhere($where);
         }
@@ -99,6 +100,7 @@ class Gallery extends \yii\easyii2\components\API
 
     private function findPhoto($id)
     {
-        return Photo::findOne($id);
+        $modelPhoto = ActiveRecord::getModelByName('Photo', 'admin');
+        return $modelPhoto::findOne($id);
     }
 }

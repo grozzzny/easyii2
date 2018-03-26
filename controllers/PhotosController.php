@@ -2,6 +2,7 @@
 namespace yii\easyii2\controllers;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 use yii\web\Response;
@@ -15,6 +16,7 @@ class PhotosController extends Controller
 {
     public function behaviors()
     {
+        $modelPhoto = ActiveRecord::getModelByName('Photo', 'admin');
         return [
             [
                 'class' => 'yii\filters\ContentNegotiator',
@@ -24,7 +26,7 @@ class PhotosController extends Controller
             ],
             [
                 'class' => SortableController::className(),
-                'model' => Photo::className(),
+                'model' => $modelPhoto::className(),
             ]
         ];
     }
@@ -33,7 +35,7 @@ class PhotosController extends Controller
     {
         $success = null;
 
-        $photo = new Photo;
+        $photo = ActiveRecord::getModelByName('Photo', 'admin');
         $photo->class = $class;
         $photo->item_id = $item_id;
         $photo->image = UploadedFile::getInstance($photo, 'image');
@@ -71,7 +73,8 @@ class PhotosController extends Controller
 
     public function actionDescription($id)
     {
-        if(($model = Photo::findOne($id)))
+        $photo = ActiveRecord::getModelByName('Photo', 'admin');
+        if(($model = $photo::findOne($id)))
         {
             if(Yii::$app->request->post('description'))
             {
@@ -94,8 +97,8 @@ class PhotosController extends Controller
     public function actionImage($id)
     {
         $success = null;
-
-        if(($photo = Photo::findOne($id)))
+        $model = ActiveRecord::getModelByName('Photo', 'admin');
+        if(($photo = $model::findOne($id)))
         {
             $oldImage = $photo->image;
 
@@ -139,7 +142,9 @@ class PhotosController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Photo::findOne($id))){
+        $model = ActiveRecord::getModelByName('Photo', 'admin');
+
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');

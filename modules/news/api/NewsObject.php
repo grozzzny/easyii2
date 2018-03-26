@@ -59,7 +59,8 @@ class NewsObject extends \yii\easyii2\components\ApiObject
         if(!$this->_photos){
             $this->_photos = [];
             $model = ActiveRecord::getModelByName('News', 'news');
-            foreach(Photo::find()->where(['class' => $model::className(), 'item_id' => $this->id])->sort()->all() as $model){
+            $modelPhoto = ActiveRecord::getModelByName('Photo', 'admin');
+            foreach($modelPhoto::find()->where(['class' => $model::className(), 'item_id' => $this->id])->sort()->all() as $model){
                 $this->_photos[] = new PhotoObject($model);
             }
         }

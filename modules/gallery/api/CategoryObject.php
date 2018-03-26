@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\gallery\api;
 
 use yii\data\ActiveDataProvider;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\components\API;
 use yii\easyii2\models\Photo;
 use yii\easyii2\modules\gallery\models\Category;
@@ -39,8 +40,8 @@ class CategoryObject extends \yii\easyii2\components\ApiObject
     {
         if(!$this->_photos){
             $this->_photos = [];
-
-            $query = Photo::find()->where(['class' => Category::className(), 'item_id' => $this->id])->sort();
+            $modelPhoto = ActiveRecord::getModelByName('Photo', 'admin');
+            $query = $modelPhoto::find()->where(['class' => Category::className(), 'item_id' => $this->id])->sort();
 
             if(!empty($options['where'])){
                 $query->andFilterWhere($options['where']);
