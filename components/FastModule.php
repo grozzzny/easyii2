@@ -24,7 +24,7 @@ class FastModule extends Module
     {
         $models = [];
         $adminModule = AdminModule::getInstance();
-        $settings = $adminModule->getModule(Yii::$app->controller->module->id)->settings;
+        $settings = empty($adminModule) ? $this->settings : $adminModule->getModule(Yii::$app->controller->module->id)->settings;
 
         foreach (glob($this->basePath . "/models/*.php") as $file){
             $file_name = basename($file, '.php');
@@ -60,6 +60,8 @@ class FastModule extends Module
     public static function setView($view)
     {
         $pathMap = Yii::$app->view->theme->pathMap;
+
+        if(empty($pathMap)) return false;
 
         if(key_exists('@vendor/grozzzny/easyii2/views', $pathMap)){
             array_push(Yii::$app->view->theme->pathMap['@vendor/grozzzny/easyii2/views'], $view);
