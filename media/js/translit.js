@@ -33,8 +33,8 @@ var translit = function (text){
         else {
             //result += text[i];
             //curent_sim = text[i];
-            result += space;
-            curent_sim = space;
+            result += '';
+            curent_sim = '';
         }
     }
 
