@@ -95,7 +95,7 @@ $(function(){
 
 
     (function () {
-        var $slug = $("[name*='slug']"),
+        var $slug = $("[name*='slug']:not([pattern])"),
             $title = $("[name*='title']");
         if ($slug.length == 0 || $title.length == 0) return false;
 
