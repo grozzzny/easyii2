@@ -68,7 +68,7 @@
 
 
 			},
-			insert: function(sdffd)
+			insert: function()
 			{
 				var data = $('#redactor-insert-highlight2-area').val();
 				var class_name = $('#modal-highlight-code-input').val();
