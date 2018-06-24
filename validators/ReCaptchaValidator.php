@@ -40,7 +40,7 @@ class ReCaptchaValidator extends Validator
             '{attribute} cannot be blank.',
             ['attribute' => $model->getAttributeLabel($attribute)]
         );
-        return "(function(messages){if(!grecaptcha.getResponse()){messages.push('{$message}');}})(messages);";
+        return "if(this.\$form.find('[name=\"g-recaptcha-response\"]').val() === ''){messages.push('{$message}');}";
     }
 
     /**
