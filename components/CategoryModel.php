@@ -6,13 +6,14 @@ use yii\behaviors\SluggableBehavior;
 use yii\easyii2\behaviors\CacheFlush;
 use yii\easyii2\behaviors\SeoBehavior;
 use creocoder\nestedsets\NestedSetsBehavior;
+use yii\easyii2\modules\article\models\Item;
 
 /**
  * Base CategoryModel. Shared by categories
  * @package yii\easyii2\components
  * @inheritdoc
  */
-class CategoryModel extends \yii\easyii2\components\ActiveRecord
+class  CategoryModel extends \yii\easyii2\components\ActiveRecord
 {
     const STATUS_OFF = 0;
     const STATUS_ON = 1;
@@ -130,7 +131,8 @@ class CategoryModel extends \yii\easyii2\components\ActiveRecord
      */
     public static function generateTree()
     {
-        $collection = static::find()->with('seo')->sort()->asArray()->all();
+        /* @var Item[] $collection*/
+        $collection = static::find()->with('seo')->sort()->all();
         $trees = array();
         $l = 0;
 
@@ -138,10 +140,21 @@ class CategoryModel extends \yii\easyii2\components\ActiveRecord
             // Node Stack. Used to help building the hierarchy
             $stack = array();
 
+            // Очень плохой код (
             foreach ($collection as $node) {
-                $item = $node;
+                $item = [];
                 unset($item['lft'], $item['rgt'], $item['order_num']);
+                $item['category_id'] = (string) $node->category_id;
+                $item['title'] = (string) $node->title;
+                $item['image'] = (string) $node->image;
+                $item['slug'] = (string) $node->slug;
+                $item['tree'] = (string) $node->tree;
+                $item['depth'] = (string) $node->depth;
+                $item['status'] = (string) $node->status;
+                $item['text'] = (string) $node->text;
+                $item['seo'] = (array) $node->seo;
                 $item['children'] = array();
+                $item['model'] = $node;
 
                 // Number of stack items
                 $l = count($stack);

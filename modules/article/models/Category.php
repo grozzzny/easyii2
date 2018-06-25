@@ -12,7 +12,7 @@ use yii\easyii2\components\ActiveRecord;
  * @property string $image [varchar(128)]
  * @property int $order_num [int(11)]
  * @property string $slug [varchar(128)]
- * @property int $tree [int(11)]
+ * @property string $tree [int(11)]
  * @property int $lft [int(11)]
  * @property int $rgt [int(11)]
  * @property int $depth [int(11)]

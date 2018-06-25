@@ -6,6 +6,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\models\Tag;
+use yii\easyii2\models\TreeObject;
 use yii\easyii2\modules\article\models\Item;
 use yii\easyii2\widgets\Fancybox;
 use yii\widgets\LinkPager;
@@ -15,7 +16,7 @@ use yii\widgets\LinkPager;
  * @package yii\easyii2\modules\article\api
  *
  * @method static CategoryObject cat(mixed $id_slug) Get article category by id or slug
- * @method static array tree() Get article categories as tree
+ * @method static TreeObject[] tree() Get article categories as tree
  * @method static array cats() Get article categories as flat array
  * @method static array items(array $options = []) Get list of articles as ArticleObject objects
  * @method static ArticleObject get(mixed $id_slug) Get article object by id or slug
