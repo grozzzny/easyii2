@@ -11,7 +11,7 @@ This repository is development package (yii2 extension).
 
 #### Contacts ####
 
-Feel free to email me on grozzznyhope@gmail.com
+Feel free to email me on grozzzny@gmail.com
 
 
 ```
