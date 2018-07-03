@@ -53,7 +53,7 @@ class AdminModule extends \yii\base\Module implements BootstrapInterface
             ];
             if(empty($module->settings)) {
                 $class = $module->class;
-                $modules[$module->name]['settings'] = $class::getInstance()->settings;
+                $modules[$module->name]['settings'] = isset($class::getInstance()->settings) ? $class::getInstance()->settings : [];
             } else {
                 $modules[$module->name]['settings'] = $module->settings;
             }
