@@ -59,7 +59,10 @@ class FastModule extends Module
 
     public static function setView($view)
     {
-        if(!$pathMap = Yii::$app->view->theme->pathMap) return false;
+
+        if(!isset(Yii::$app->view->theme->pathMap)) return false;
+
+        $pathMap = Yii::$app->view->theme->pathMap;
 
         if(empty($pathMap)) return false;
 
