@@ -2,6 +2,8 @@
 namespace yii\easyii2\behaviors;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
+use yii\easyii2\components\Controller;
 
 /**
  * Status behavior. Adds statuses to models
@@ -13,16 +15,20 @@ class StatusController extends \yii\base\Behavior
 
     public function changeStatus($id, $status)
     {
+        /* @var ActiveRecord $modelClass*/
         $modelClass = $this->model;
+
+        /* @var Controller $controller*/
+        $controller = $this->owner;
 
         if(($model = $modelClass::findOne($id))){
             $model->status = $status;
             $model->update();
         }
         else{
-            $this->error = Yii::t('easyii2', 'Not found');
+            $controller->error = Yii::t('easyii2', 'Not found');
         }
 
-        return $this->owner->formatResponse(Yii::t('easyii2', 'Status successfully changed'));
+        return $controller->formatResponse(Yii::t('easyii2', 'Status successfully changed'));
     }
 }

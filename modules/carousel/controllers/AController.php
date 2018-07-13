@@ -18,14 +18,16 @@ class AController extends Controller
 {
     public function behaviors()
     {
+        $model = ActiveRecord::getModelByName('Carousel', 'carousel');
+
         return [
             [
                 'class' => SortableController::className(),
-                'model' => Carousel::className()
+                'model' => $model::className()
             ],
             [
                 'class' => StatusController::className(),
-                'model' => Carousel::className()
+                'model' => $model::className()
             ]
         ];
     }
