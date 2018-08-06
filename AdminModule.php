@@ -4,14 +4,10 @@ namespace yii\easyii2;
 use Yii;
 use yii\easyii2\models\ModuleDBEasyii2Interface;
 use yii\easyii2\models\ModuleEasyii2Interface;
-use yii\helpers\ArrayHelper;
 use yii\web\View;
 use yii\base\Application;
 use yii\base\BootstrapInterface;
-
 use yii\easyii2\models\Module;
-use yii\easyii2\models\Setting;
-use yii\easyii2\assets\LiveAsset;
 
 /**
  * Class AdminModule
