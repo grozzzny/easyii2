@@ -68,7 +68,7 @@ $context = $this->context;
                 </ul>
             </li>
             <li class="header"><?= Yii::t('easyii2', 'Modules') ?>:</li>
-            <?php foreach(AdminModule::getInstance()->allModules as $module) : ?>
+            <?php foreach(Yii::$app->getModule('admin')->allModules as $module) : ?>
             <li class="<?= ($context->module->id == $module->name ? 'active' : '') ?>">
                 <a href="<?= Url::to(["/admin/$module->name"]) ?>">
                     <?php if($module->icon != '') : ?>
