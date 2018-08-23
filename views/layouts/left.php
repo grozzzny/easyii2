@@ -77,7 +77,7 @@ $context = $this->context;
                     <span>
                         <?= $module->getTitle() ?>
                     </span>
-                    <?php if(isset($module->model->notice) && $module->model->notice > 0) : ?>
+                    <?php if(isset($module->model) && isset($module->model->notice) && $module->model->notice > 0) : ?>
                     <span class="pull-right-container">
                       <span class="label label-primary pull-right"><?= $module->model->notice ?></span>
                     </span>
