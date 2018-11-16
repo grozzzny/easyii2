@@ -25,12 +25,12 @@ class WebConsole
             defined('STDIN') or define( 'STDIN',  self::$logFileHandler);
             defined('STDOUT') or define( 'STDOUT',  self::$logFileHandler);
 
+            $consoleConfigFile = Yii::getAlias(Yii::$app->getModule('admin')->consoleConfig);
+
             $oldApp = Yii::$app;
 
-            $consoleConfigFile = Yii::getAlias('@app/config/console.php');
-
             if(!file_exists($consoleConfigFile) || !is_array(($consoleConfig = require($consoleConfigFile)))){
-                throw new \yii\web\ServerErrorHttpException('Cannot find `'.Yii::getAlias('@app/config/console.php').'`. Please create and configure console config.');
+                throw new \yii\web\ServerErrorHttpException('Cannot find `'.$consoleConfigFile.'`. Please create and configure console config.');
             }
 
             self::$_console = new \yii\console\Application($consoleConfig);
