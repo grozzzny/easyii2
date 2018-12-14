@@ -17,6 +17,8 @@ use yii\easyii2\models\Photo;
  * @property integer $depth
  * @property integer $order_num
  * @property boolean $status
+ *
+ * @property-read Photo[] $photos
  */
 class Category extends \yii\easyii2\components\CategoryModel
 {
