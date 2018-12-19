@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\subscribe\api;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\modules\subscribe\models\Subscriber;
 
 use yii\helpers\Html;
@@ -20,14 +21,15 @@ class Subscribe extends \yii\easyii2\components\API
 {
     const SENT_VAR = 'subscribe_sent';
 
-    private $_defaultFormOptions = [
+    public $_defaultFormOptions = [
         'errorUrl' => '',
         'successUrl' => ''
     ];
 
     public function api_form($options = [])
     {
-        $model = new Subscriber;
+        /** @var Subscriber $model */
+        $model =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
         $options = array_merge($this->_defaultFormOptions, $options);
 
         ob_start();
@@ -49,7 +51,9 @@ class Subscribe extends \yii\easyii2\components\API
 
     public function api_save($email)
     {
-        $model = new Subscriber(['email' => $email]);
+        /** @var Subscriber $model */
+        $model =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
+        $model->email = $email;
         if($model->save()){
             return ['result' => 'success', 'error' => false];
         } else {

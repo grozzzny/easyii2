@@ -2,6 +2,7 @@
 namespace yii\easyii2\modules\subscribe\controllers;
 
 use Yii;
+use yii\easyii2\components\ActiveRecord;
 use yii\easyii2\modules\subscribe\api\Subscribe;
 use yii\widgets\ActiveForm;
 
@@ -11,7 +12,8 @@ class SendController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $model = new Subscriber;
+        /** @var Subscriber $model */
+        $model =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
         $request = Yii::$app->request;
 
         if ($model->load($request->post())) {
@@ -33,7 +35,9 @@ class SendController extends \yii\web\Controller
     {
         if($email && filter_var($email, FILTER_VALIDATE_EMAIL))
         {
-            Subscriber::deleteAll(['email' => $email]);
+            /** @var Subscriber $model */
+            $model =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
+            $model::deleteAll(['email' => $email]);
             echo '<h1>'.Yii::t('easyii2/subscribe/api', 'You have successfully unsubscribed!').'</h1>';
         }
         else{

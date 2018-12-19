@@ -3,6 +3,14 @@ namespace yii\easyii2\modules\subscribe\models;
 
 use Yii;
 
+/**
+ * Class Subscriber
+ * @package yii\easyii2\modules\subscribe\models
+ * @property int $subscriber_id [int(11)]
+ * @property string $email [varchar(128)]
+ * @property string $ip [varchar(16)]
+ * @property int $time [int(11)]
+ */
 class Subscriber extends \yii\easyii2\components\ActiveRecord
 {
     const FLASH_KEY = 'eaysiicms_subscribe_send_result';

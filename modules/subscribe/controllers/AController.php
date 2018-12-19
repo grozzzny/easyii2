@@ -3,6 +3,7 @@ namespace yii\easyii2\modules\subscribe\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\easyii2\components\ActiveRecord;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
@@ -15,8 +16,10 @@ class AController extends Controller
 {
     public function actionIndex()
     {
+        /** @var Subscriber $model */
+        $model =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
         $data = new ActiveDataProvider([
-            'query' => Subscriber::find()->desc(),
+            'query' => $model::find()->desc(),
         ]);
         return $this->render('index', [
             'data' => $data
@@ -27,8 +30,11 @@ class AController extends Controller
     {
         $this->setReturnUrl();
 
+        /** @var History $model */
+        $model =  ActiveRecord::getModelByName('History', 'subscribe');
+
         $data = new ActiveDataProvider([
-            'query' => History::find()->desc(),
+            'query' => $model::find()->desc(),
         ]);
         return $this->render('history', [
             'data' => $data
@@ -37,7 +43,10 @@ class AController extends Controller
 
     public function actionView($id)
     {
-        $model = History::findOne($id);
+        /** @var History $model */
+        $model =  ActiveRecord::getModelByName('History', 'subscribe');
+
+        $model = $model::findOne($id);
 
         if($model === null){
             $this->flash('error', Yii::t('easyii2', 'Not found'));
@@ -51,7 +60,8 @@ class AController extends Controller
 
     public function actionCreate()
     {
-        $model = new History;
+        /** @var History $model */
+        $model =  ActiveRecord::getModelByName('History', 'subscribe');
 
         if ($model->load(Yii::$app->request->post())) {
             if(Yii::$app->request->isAjax){
@@ -79,7 +89,10 @@ class AController extends Controller
 
     public function actionDelete($id)
     {
-        if(($model = Subscriber::findOne($id))){
+        /** @var Subscriber $model */
+        $model =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
+
+        if(($model = $model::findOne($id))){
             $model->delete();
         } else {
             $this->error = Yii::t('easyii2', 'Not found');
@@ -93,7 +106,10 @@ class AController extends Controller
                 "<br><br>".
                 "--------------------------------------------------------------------------------";
 
-        foreach(Subscriber::find()->all() as $subscriber){
+        /** @var Subscriber $model */
+        $modelSubscriber =  ActiveRecord::getModelByName('Subscriber', 'subscribe');
+
+        foreach($modelSubscriber::find()->all() as $subscriber){
 			$unsubscribeLink = '<br><a href="' . Url::to(['/admin/'.$this->module->id.'/send/unsubscribe', 'email' => $subscriber->email], true) . '" target="_blank">'.Yii::t('easyii2/subscribe', 'Unsubscribe').'</a>';
             if(Yii::$app->mailer->compose()
                 ->setFrom(Setting::get('robot_email'))
