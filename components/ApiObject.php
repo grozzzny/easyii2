@@ -2,6 +2,7 @@
 namespace yii\easyii2\components;
 
 use Yii;
+use yii\base\Component;
 use yii\easyii2\helpers\Image;
 
 /**
@@ -10,7 +11,7 @@ use yii\easyii2\helpers\Image;
  *
  * @property integer $id
  */
-class ApiObject extends \yii\base\Object
+class ApiObject extends Component
 {
     /** @var ActiveRecord  */
     public $model;
