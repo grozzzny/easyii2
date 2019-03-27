@@ -44,6 +44,9 @@ class DateTimePicker extends InputWidget
         if(empty($this->options['locale'])){
             $this->options['locale'] = Data::getLocale();
         }
+        
+        unset($this->options['class']);
+        
         $clientOptions = (count($this->options)) ? Json::encode($this->options) : '';
         $time = $this->model->{$this->attribute} ? $this->model->{$this->attribute} : time();
         $this->getView()->registerJs('
