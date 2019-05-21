@@ -46,6 +46,7 @@ class DateTimePicker extends InputWidget
         }
         
         unset($this->options['class']);
+        unset($this->options['aria-required']);
         
         $clientOptions = (count($this->options)) ? Json::encode($this->options) : '';
         $time = $this->model->{$this->attribute} ? $this->model->{$this->attribute} : time();
