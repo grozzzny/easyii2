@@ -109,7 +109,7 @@ class Admin extends \yii\easyii2\components\ActiveRecord implements \yii\web\Ide
 
     public static function createRootUser()
     {
-        return new static(array_merge(self::$rootUser, [
+        return new static(array_merge(static::$rootUser, [
             'password' => Setting::get('root_password'),
             'auth_key' => Setting::get('root_auth_key')
         ]));
@@ -117,6 +117,6 @@ class Admin extends \yii\easyii2\components\ActiveRecord implements \yii\web\Ide
 
     public function isRoot()
     {
-        return $this->username === self::$rootUser['username'];
+        return $this->username === static::$rootUser['username'];
     }
 }
