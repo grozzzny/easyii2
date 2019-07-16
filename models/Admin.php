@@ -56,7 +56,7 @@ class Admin extends \yii\easyii2\components\ActiveRecord implements \yii\web\Ide
     {
         $result = null;
         try {
-            $result = $id == self::$rootUser['admin_id']
+            $result = $id == static::$rootUser['admin_id']
                 ? static::createRootUser()
                 : static::findOne($id);
         } catch (\yii\base\InvalidConfigException $e) {
@@ -71,7 +71,7 @@ class Admin extends \yii\easyii2\components\ActiveRecord implements \yii\web\Ide
 
     public static function findByUsername($username)
     {
-        if ($username === self::$rootUser['username']) {
+        if ($username === static::$rootUser['username']) {
             return static::createRootUser();
         }
         return static::findOne(['username' => $username]);
