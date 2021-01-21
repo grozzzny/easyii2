@@ -20,7 +20,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0",
         "creocoder/yii2-nested-sets": "0.9.*",
         "bower-asset/jquery.switcher": "*",
-        "grozzzny/adminlte_easyiicms": "dev-master",
+        "almasaeed2010/adminlte": "v2.4.18",
         "2amigos/yii2-selectize-widget": "~1.0"
     },
     "autoload": {
